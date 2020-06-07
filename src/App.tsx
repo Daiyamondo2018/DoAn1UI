@@ -10,7 +10,7 @@ import {
   IonTabs
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { home, grid, search, personCircle, cart, list } from 'ionicons/icons';
 import TrangChu from './pages/Trang Chu/TrangChu';
 import DanhMuc from './pages/Danh Muc/DanhMuc';
 import TimKiem from './pages/Tim Kiem/TimKiem';
@@ -46,33 +46,33 @@ const App: React.FC = () => (
           <Route path="/danhmuc" component={DanhMuc} exact={true} />
           <Route path="/timkiem" component={TimKiem} />
           <Route path="/donhang" component={DonHang} exact={true}/>
-          <Route path="/giohang" component={GioHang} exact={true}/>
+          {/* <Route path="/giohang" component={GioHang} exact={true}/> */}
           <Route path="/canhan" component={CaNhan} exact={true}/>
           <Route path="/" render={() => <Redirect to="/trangchu" />} exact={true} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/trangchu">
-            <IonIcon icon={triangle} />
+            <IonIcon icon={home} />
             <IonLabel>Trang Chủ</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/danhmuc">
-            <IonIcon icon={ellipse} />
+            <IonIcon icon={grid} />
             <IonLabel>Danh Mục</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab3" href="/timkiem">
-            <IonIcon icon={square} />
+            <IonIcon icon={search} />
             <IonLabel>Tìm Kiếm</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab4" href="/donhang">
-            <IonIcon icon={square} />
+            <IonIcon icon={list} />
             <IonLabel>Đơn Hàng</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab5" href="/giohang">
-            <IonIcon icon={square} />
+          {/* <IonTabButton tab="tab5" href="/giohang">
+            <IonIcon icon={cart} />
             <IonLabel>Giỏ Hàng</IonLabel>
-          </IonTabButton>
+          </IonTabButton> */}
           <IonTabButton tab="tab6" href="/canhan">
-            <IonIcon icon={square} />
+            <IonIcon icon={personCircle} />
             <IonLabel>Cá Nhân</IonLabel>
           </IonTabButton>
         </IonTabBar>
