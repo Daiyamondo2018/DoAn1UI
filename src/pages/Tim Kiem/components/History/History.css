@@ -1,0 +1,7 @@
+.delete_all {
+    --background: transparent !important;
+    background-color: transparent !important;
+    background: none !important;
+    color: #3671c9;
+    font-size: 18px;
+}

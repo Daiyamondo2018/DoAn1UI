@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import './TimKiem.css';
+import Header from './components/Header/Header';
+import HotKey from './components/HotKey/HotKey';
+import History from './components/History/History';
 
 class TimKiem extends Component {
   render() {
     return (
       <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Tìm Kiếm</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+        <Header/>
         <IonContent>
-          <IonHeader collapse="condense">
-            <IonToolbar>
-              <IonTitle size="large">Tìm Kiếm</IonTitle>
-            </IonToolbar>
-          </IonHeader>
+          <HotKey/>
+          <History/>
         </IonContent>
       </IonPage>
     );

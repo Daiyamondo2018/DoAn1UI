@@ -1,0 +1,29 @@
+.icon_close {
+    margin: 5px;
+    size: 20px;
+}
+
+.profile_picture {
+    position: relative;
+    color: #ffffff;
+    width: 60px;
+    height: 80px;
+    margin: 5px;
+}
+
+.login_label {
+    color: royalblue !important;
+    font-size: 16px;
+}
+
+.login_signup {
+    max-height: 80px !important;
+}
+
+.login_signup:hover{
+    cursor: pointer;
+}
+
+.item  {
+    margin: 5px;
+}

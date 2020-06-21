@@ -7,7 +7,8 @@ import {
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
-  IonTabs
+  IonTabs,
+  withIonLifeCycle
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { home, grid, search, personCircle, cart, list } from 'ionicons/icons';
@@ -34,19 +35,18 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import DonHang from './pages/Don Hang/DonHang';
-import GioHang from './pages/Gio Hang/GioHang';
 import CaNhan from './pages/Ca Nhan/CaNhan';
-
+import ChiTiet from './pages/Trang Chu/components/ChiTiet/ChiTiet';
 const App: React.FC = () => (
-  <IonApp>
+  <IonApp style={{backgroundColor: "white"}}>
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/trangchu" component={TrangChu} exact={true} />
-          <Route path="/danhmuc" component={DanhMuc} exact={true} />
-          <Route path="/timkiem" component={TimKiem} />
-          <Route path="/donhang" component={DonHang} exact={true}/>
-          {/* <Route path="/giohang" component={GioHang} exact={true}/> */}
+          <Route path="/trangchu" render={()=><TrangChu/>} exact={true}/>
+          <Route path="/trangchu/:id" component={ChiTiet} exact={true}></Route>
+          <Route path="/danhmuc" render={()=><DanhMuc/>} exact={true} />
+          <Route path="/timkiem" render={()=><TimKiem/>} exact={true} />
+          <Route path="/donhang" render={()=><DonHang/>} exact={true}/>        
           <Route path="/canhan" component={CaNhan} exact={true}/>
           <Route path="/" render={() => <Redirect to="/trangchu" />} exact={true} />
         </IonRouterOutlet>
@@ -66,11 +66,7 @@ const App: React.FC = () => (
           <IonTabButton tab="tab4" href="/donhang">
             <IonIcon icon={list} />
             <IonLabel>Đơn Hàng</IonLabel>
-          </IonTabButton>
-          {/* <IonTabButton tab="tab5" href="/giohang">
-            <IonIcon icon={cart} />
-            <IonLabel>Giỏ Hàng</IonLabel>
-          </IonTabButton> */}
+          </IonTabButton>         
           <IonTabButton tab="tab6" href="/canhan">
             <IonIcon icon={personCircle} />
             <IonLabel>Cá Nhân</IonLabel>
@@ -81,4 +77,4 @@ const App: React.FC = () => (
   </IonApp>
 );
 
-export default App;
+export default withIonLifeCycle(App);

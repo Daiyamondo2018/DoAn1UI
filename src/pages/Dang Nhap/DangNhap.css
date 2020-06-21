@@ -1,0 +1,15 @@
+.input {
+    width: 100%;
+    font-size: 16px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.login_button {
+    border-radius: 4px !important;
+    margin: 5px !important;
+    background-color: red !important;
+    --background: red !important;
+    color: white;
+    width: 100%;
+}

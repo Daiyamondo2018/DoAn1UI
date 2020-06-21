@@ -9,9 +9,9 @@ class Header extends Component{
             <IonHeader class="header"> 
                 <IonToolbar class="header_toolbar">
                     <IonButtons>
-                        <IonSearchbar color="black" class="header_search" placeholder = "Nhập tên để tìm..."/>
+                        <IonSearchbar color="black" class="header_searchbar" placeholder = "Nhập tên để tìm..."/>
                         <IonButton ion-button item-end>
-                            <IonIcon icon={cart}></IonIcon>
+                            <IonIcon class="cart" icon={cart}></IonIcon>
                         </IonButton>
                     </IonButtons>
                 </IonToolbar>
