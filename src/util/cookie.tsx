@@ -27,3 +27,13 @@ export const getCookie = (cname: any) => {
 export const removeCookie = (name: any) => {
     document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
+
+
+export const putArraytoLocalStorage = (name: any, values: any) => {
+    localStorage.setItem(name, JSON.stringify(values));
+}
+
+export const getArrayfromLocalStorage = (name: any) => {
+    let names = String(localStorage.getItem("names"));
+    return JSON.parse(names);
+}

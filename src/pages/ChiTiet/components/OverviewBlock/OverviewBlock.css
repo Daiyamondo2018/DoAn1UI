@@ -1,0 +1,47 @@
+.product_image {
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 400px;
+    width: auto;
+    object-fit: fill !important;
+}
+
+.product_name {
+    font-size: 18px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.current_price {
+    margin-top: 5px;
+    margin-left: 10px;
+    color: red !important;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.unit_price {
+    margin-top: 5px !important;
+    margin-left: 10px !important;
+    text-decoration: line-through;
+}
+
+.discount_price {
+    margin-top: 5px !important;
+    margin-left: 10px !important;
+    font-style: italic;
+}
+
+.label {
+    text-align: left !important;
+    vertical-align: middle !important;
+}
+
+.promotion {
+    margin: 5px !important;
+    height: 60px !important;
+}
+
+.image {
+    height: 60px !important;
+}

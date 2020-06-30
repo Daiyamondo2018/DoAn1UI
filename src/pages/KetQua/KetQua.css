@@ -1,0 +1,15 @@
+.content {
+    height: 100%;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    -ms-overflow-style: none !important;
+}
+
+.content::-webkit-scrollbar {
+    display: none;
+}
+
+.title {
+    margin: 5px;
+    color: darkred;
+}

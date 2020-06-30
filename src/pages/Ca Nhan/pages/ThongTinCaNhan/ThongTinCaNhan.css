@@ -1,0 +1,42 @@
+.header {
+    background-color: royalblue;
+}
+
+.back {
+    margin: 10px;
+}
+
+.title {
+    text-align: center !important;
+    color: white;
+    background-color: transparent;
+}
+.label {
+    color: royalblue !important;
+    margin: 5px;
+    padding: 5px;
+}
+
+.input {
+    border: solid papayawhip 1px !important;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.gender_group {
+    margin: 5px;
+}
+
+.gender {
+    margin-left: 5px;
+    margin-right: 15px;
+    font-size: 16px;
+    vertical-align: text-top;
+}
+
+.save_button {
+    margin-top: 5px;
+    width: 100%;
+    color: white;
+    --background: red !important;
+}

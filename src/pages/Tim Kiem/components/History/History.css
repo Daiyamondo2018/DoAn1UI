@@ -1,7 +1,26 @@
+
 .delete_all {
     --background: transparent !important;
     background-color: transparent !important;
     background: none !important;
     color: #3671c9;
     font-size: 18px;
+}
+
+.search_button {
+    width: 80%;
+    background-color: white !important;
+    --background: white !important;
+}
+
+
+.search_button .button-inner {
+    width: 90%;
+    height: 100% !important;
+    background-color: white !important;
+    --background: white !important; 
+}
+
+.close {
+    cursor: pointer;
 }

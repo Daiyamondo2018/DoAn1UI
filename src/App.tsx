@@ -36,18 +36,26 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import DonHang from './pages/Don Hang/DonHang';
 import CaNhan from './pages/Ca Nhan/CaNhan';
-import ChiTiet from './pages/Trang Chu/components/ChiTiet/ChiTiet';
+import ChiTiet from './pages/ChiTiet/ChiTiet';
+import KetQua from './pages/KetQua/KetQua';
+import ThongTinCaNhan from './pages/Ca Nhan/pages/ThongTinCaNhan/ThongTinCaNhan';
+import GioHang from './pages/Gio Hang/GioHang';
+import DatHang from './pages/DatHang/DatHang';
 const App: React.FC = () => (
   <IonApp style={{backgroundColor: "white"}}>
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/trangchu" render={()=><TrangChu/>} exact={true}/>
-          <Route path="/trangchu/:id" component={ChiTiet} exact={true}></Route>
-          <Route path="/danhmuc" render={()=><DanhMuc/>} exact={true} />
-          <Route path="/timkiem" render={()=><TimKiem/>} exact={true} />
-          <Route path="/donhang" render={()=><DonHang/>} exact={true}/>        
-          <Route path="/canhan" component={CaNhan} exact={true}/>
+          <Route path="/trangchu" component={TrangChu} exact={true}/>
+          <Route path="/trangchu/:id" component={ChiTiet} exact={true}/>
+          <Route path="/danhmuc" component={DanhMuc} exact={true} />
+          <Route path="/timkiem" component={TimKiem} exact={true} />
+          <Route path="/giohang" component={GioHang} exact={true}/>
+          <Route path="/dathang" component={DatHang} exact={true}/>
+          <Route path="/donhang" component={DonHang} exact={true}/>        
+          <Route path="/canhan" component={CaNhan}/>
+          <Route path="/thongtincanhan" component={ThongTinCaNhan}/>
+          <Route path="/ketqua" component={KetQua}/>
           <Route path="/" render={() => <Redirect to="/trangchu" />} exact={true} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">

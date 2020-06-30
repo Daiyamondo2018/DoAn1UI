@@ -9,6 +9,59 @@ export class Laptop {
     alt: any;
     brand: any;
     unit_price: any;
+    discount_price: any;
+    quantity: any;
+    avg_rating: any;
+    graphics_card: any;
+    ports: any;
+    os: any;
+    design: any;
+    thickness: any;
+    weight: any;
+    cpu: CPU = new CPU();
+    ram: RAM = new RAM();
+    hard_drive: HardDrive = new HardDrive();
+    monitor: Monitor = new Monitor();
+}
+
+export class CPU {
+    id: any;
+    type:
+    any;
+    detail: any;
+    speed: any;
+    max_speed: any;
+}
+
+export class RAM {
+    id: any;
+    size: any;
+    type: any;
+    bus: any;
+    extra_slot: any;
+}
+
+export class HardDrive {
+    id: any;
+    size: any;
+    type: any;
+    detail: any;
+}
+
+export class Monitor {
+    id: any;
+    size: any;
+    resolution_type: any;
+    resolution_width: any;
+    resolution_height: any;
+}
+
+export class Promotion {
+    id: any;
+    name: any;
+    price: any;
+    quantity: any;
+    alt: any;
 }
 
 const LaptopBlock:React.FC = (props: any)=>{
@@ -21,15 +74,10 @@ const LaptopBlock:React.FC = (props: any)=>{
     });
 
     async function fetchData(url: any) {
-        console.log("begin fetch");
         let respone = await fetch(url);
-        console.log("response...");
         let data = await respone.json();
-        console.log("data...");
         setItems(data);
     }
-
-    console.log("items: " + items);
 
     let laptops = items.map((item) => {
         let imgUrl = "/api/images/600/laptops/" + item.id+ "/" + decodeURI(item.name) + ".jpg";
@@ -37,9 +85,10 @@ const LaptopBlock:React.FC = (props: any)=>{
         return(
            <IonCard key={item.id} class="laptop" href={routerLink}>
                 <IonCardContent>
-                        <IonTitle class="name">{item.name}</IonTitle>
-                        <IonImg src={imgUrl}></IonImg>
-                        <IonItem class="price">{item.unit_price}</IonItem>
+                    <IonTitle class="name">{item.name}</IonTitle>
+                    <IonImg class="product_image" src={imgUrl}></IonImg>
+                    <IonLabel class="price">{(item.unit_price-item.discount_price).toLocaleString() + " đ\n"}</IonLabel>
+                    <IonLabel class="discount_price">{item.unit_price.toLocaleString() +" đ"}</IonLabel>
                 </IonCardContent>
            </IonCard>
         )

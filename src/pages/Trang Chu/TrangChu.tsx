@@ -7,16 +7,16 @@ import LaptopBlock from './components/LaptopBlock/LaptopBlock';
 export const TrangChu:React.FC= ()=>{
   return(
     <IonPage>
-        <Header/>
+        <Header searchParam=""/>
         <IonContent class="content">
-        <IonTitle class="block_title">Sản phẩm mới</IonTitle>
-        <LaptopBlock url="/api/laptops/types/new"/>
-        <IonTitle class="block_title">Sản phẩm bán chạy</IonTitle>
-        <LaptopBlock url="/api/laptops/types/top-selling"/>
-        <IonTitle class="block_title">Sản phẩm phổ biến</IonTitle>
-        <LaptopBlock url="/api/laptops/types/common"/>
-        <IonTitle class="block_title">Sản phẩm giá rẻ</IonTitle>
-        <LaptopBlock url="/api/laptops/types/cheap"/>
+          <IonTitle class="block_title">Sản phẩm mới</IonTitle>
+          <LaptopBlock url="/api/laptops/types/new"/>
+          <IonTitle class="block_title">Sản phẩm bán chạy</IonTitle>
+          <LaptopBlock url="/api/laptops/types/top-selling"/>
+          <IonTitle class="block_title">Sản phẩm phổ biến</IonTitle>
+          <LaptopBlock url="/api/laptops/types/common"/>
+          <IonTitle class="block_title">Sản phẩm giá rẻ</IonTitle>
+          <LaptopBlock url="/api/laptops/types/cheap"/>
         </IonContent>
     </IonPage>
 );

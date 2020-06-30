@@ -4,7 +4,7 @@
 }
 
 .laptops {
-    min-height: 220px;
+    height: 200px;
     width: 100%;
     overflow-x: scroll !important;
     overflow-y: hidden !important;
@@ -16,34 +16,35 @@
     display: none;
 }
 
-.laptops .laptop {
+.laptop {
     display: inline-block !important;
     vertical-align: top !important;
-    min-width: 180px !important;
-    height: 200px !important;
+    width: 180px;
+    height: 220px;
 }
 
-.laptops .laptop .name {
+
+.laptop .name {
     color: white;
 }
 
-.laptops .laptop .product_image {
+.laptop .product_image {
     height: 150px !important;
 }
 
-.laptops .laptop .price {
+.laptop .price {
     text-align: center !important;
     color: darkred;
     font-size: 16px;
     font-weight: bold;
 }
 
-.laptops .laptop .discount_price {
+.laptop .discount_price {
     text-align: center !important;
     text-decoration: line-through;
 }
 
-.laptops .laptop .ratingIcon {
+.ratingIcon {
     font-size: 16px;
     margin-right: 3px;
 }

@@ -4,13 +4,17 @@
     margin-right: 10px;
 }
 
+.hotkey_title {
+    text-align: left;
+}
+
 .button {
     color: black;
     margin-left: 5px;
     margin-right: 5px;
     border-radius: 4px;
     text-transform: none !important;
-    background-color: darkgray !important;
-    --background: darkgray !important;
+    background-color: lightgray !important;
+    --background: lightgray !important;
 }
 

@@ -1,6 +1,5 @@
-.icon_close {
+.content {
     margin: 5px;
-    size: 20px;
 }
 
 .profile_picture {
@@ -24,6 +23,32 @@
     cursor: pointer;
 }
 
-.item  {
+.static  {
     margin: 5px;
+}
+
+.icon_close {
+    margin: 5px;
+    size: 20px;
+}
+
+.input {
+    width: 100%;
+    font-size: 16px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.signup_button, .login_button, .logout_button, .xacnhan_button {
+    border-radius: 4px !important;
+    margin: 5px !important;
+    background-color: red !important;
+    --background: red !important;
+    color: white;
+    width: 100%;
+}
+
+.quen_title {
+    text-align: center;
+    margin: 10px;
 }
