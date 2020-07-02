@@ -115,7 +115,7 @@ const OverviewBlock: React.FC<Props> = (prop)=> {
                     promotions.map((promotion) => { 
                         console.log("promotion: " + JSON.stringify(promotion));
                         return (
-                        <IonRow class="promotion">
+                        <IonRow class="promotion" key={promotion.id}>
                             <IonImg class="image" title={promotion.name} src={"/api/images/200/promotions/" + promotion.id +"/" + promotion.alt +".jpg"}></IonImg>
                             <IonCol><IonLabel className="ion-text-wrap">{promotion.name + " " + promotion.price.toLocaleString() + "đ"}</IonLabel></IonCol>
                         </IonRow>

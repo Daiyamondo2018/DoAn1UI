@@ -4,7 +4,7 @@
 }
 
 .laptops {
-    min-height: 220px;
+    margin: 0px !important;
     width: 100%;
     overflow-x: scroll !important;
     overflow-y: hidden !important;
@@ -17,10 +17,11 @@
 }
 
 .laptops .laptop {
+    margin: 0px !important;
     display: inline-block !important;
     vertical-align: top !important;
     min-width: 180px !important;
-    height: 200px !important;
+    height: 220px !important;
 }
 
 .laptops .laptop .name {
@@ -32,6 +33,7 @@
 }
 
 .laptops .laptop .price {
+    margin-left: 10px !important;
     text-align: center !important;
     color: darkred;
     font-size: 16px;
@@ -39,6 +41,7 @@
 }
 
 .laptops .laptop .discount_price {
+    width: 100% !important;
     text-align: center !important;
     text-decoration: line-through;
 }

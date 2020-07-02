@@ -17,18 +17,10 @@ const KetQua: React.FC = ()=> {
     });
     async function fetchData() {
         if(!name) {
-            url = "/api/laptops/result";
-            var bodyContent = new FormData();
-            console.log("json" + JSON.stringify(type) + JSON.stringify(value));
-            bodyContent.append(JSON.stringify(type), JSON.stringify(value?.toUpperCase()));
-            bodyContent.append("page", "1");
-            const requestOption = {
-                method: "POST",
-                header: {"Content-Type": "application/json; charset=utf-8"},
-                body: bodyContent
-            };
-            let response = await fetch(url, requestOption);
+            url = "/api/laptops/result" + search;
+            let response = await fetch(url);
             let data = await response.json();
+            console.log("Re");
             setItems(data);
             return;
         }

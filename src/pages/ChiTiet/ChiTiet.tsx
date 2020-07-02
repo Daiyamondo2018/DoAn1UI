@@ -11,6 +11,7 @@ import HLaptopBlock from '../KetQua/HLaptopBlock/HLaptopBlock';
 
 const ChiTiet:React.FC = ()=>{
 
+    const [items, setItems] = useState<Laptop[]>([]);
     const [item, setItem] = useState<Laptop>(new Laptop);
     const [ratings, setRatings] = useState([]);
     const [replies, setReplies] = useState([]);
@@ -23,7 +24,7 @@ const ChiTiet:React.FC = ()=>{
     async function fetchData() {
         const path = window.location.pathname;
         const productId = path.split("/").slice(-1).pop();
-        await Promise.all([loadProduct(productId), loadRating(productId)]);
+        await Promise.all([loadProduct(productId), loadRating(productId), loadAnotherProduct()]);
         //const ratingIds = ratings.map((rating) => rating["id"]);
         console.log(ratings);
     }
@@ -61,6 +62,13 @@ const ChiTiet:React.FC = ()=>{
             const replies = await response.json();
             setReplies(replies);
         }
+    }
+
+    const loadAnotherProduct = async () => {
+        const url = "/api/laptops/types/default";
+        let response = await fetch(url);
+        let data = await response.json();
+        setItems(data);
     }
 
 
@@ -103,7 +111,7 @@ const ChiTiet:React.FC = ()=>{
                 <OverviewBlock promotions={promotions} item = {item}></OverviewBlock>
                 <DetailBlock item = {item}></DetailBlock>
                 <IonLabel>Sản phẩm khác</IonLabel>
-                <HLaptopBlock url = "/api/laptops/types/default"></HLaptopBlock>
+                <HLaptopBlock items={items}></HLaptopBlock>
             </IonContent>
         </IonPage>
     );

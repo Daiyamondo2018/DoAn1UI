@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import {withIonLifeCycle, useIonViewWillEnter, IonIcon, IonRouterLink, useIonViewDidEnter} from '@ionic/react';
+import {withIonLifeCycle, useIonViewWillEnter, IonIcon, IonRouterLink, useIonViewDidEnter, IonRow} from '@ionic/react';
 import { IonImg, IonLabel, IonCard, IonCardContent, IonItem, IonList, IonContent, IonTitle } from '@ionic/react';
 import './LaptopBlock.css';
 
@@ -84,12 +84,11 @@ const LaptopBlock:React.FC = (props: any)=>{
         let routerLink = "/trangchu/" + item.id;
         return(
            <IonCard key={item.id} class="laptop" href={routerLink}>
-                <IonCardContent>
-                    <IonTitle class="name">{item.name}</IonTitle>
-                    <IonImg class="product_image" src={imgUrl}></IonImg>
-                    <IonLabel class="price">{(item.unit_price-item.discount_price).toLocaleString() + " đ\n"}</IonLabel>
-                    <IonLabel class="discount_price">{item.unit_price.toLocaleString() +" đ"}</IonLabel>
-                </IonCardContent>
+                <IonTitle class="name">{item.name}</IonTitle>
+                <IonImg class="product_image" src={imgUrl}></IonImg>
+                <IonLabel class="price">{(item.unit_price-item.discount_price).toLocaleString() + " đ\n"}</IonLabel>
+                <IonRow></IonRow>
+                <IonLabel class="discount_price">{item.unit_price.toLocaleString() +" đ"}</IonLabel>
            </IonCard>
         )
     })

@@ -1,23 +1,24 @@
 .header {
-    background-color: royalblue;
+    background-color: royalblue !important;
 }
 
 .back {
-    margin: 10px;
+    margin: 10px !important;
 }
 
 .title {
     text-align: center !important;
-    color: white;
-    background-color: transparent;
+    color: white !important;
+    background-color: transparent !important;
 }
-.thongtincanhan .label {
+
+.diachi .label {
     color: royalblue !important;
     margin: 5px;
     padding: 5px;
 }
 
-.thongtincanhan .input {
+.diachi .input {
     width: 90% !important;
     border: solid papayawhip 1px !important;
     border-radius: 5px;
@@ -25,18 +26,7 @@
     margin-right: 5%;
 }
 
-.thongtincanhan .gender_group {
-    margin: 5px;
-}
-
-.thongtincanhan .gender {
-    margin-left: 5px;
-    margin-right: 15px;
-    font-size: 16px;
-    vertical-align: text-top;
-}
-
-.thongtincanhan  .save_button {
+.diachi  .save_button {
     margin-top: 5px;
     margin-left: 5%;
     margin-right: 5%;

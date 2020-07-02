@@ -95,7 +95,7 @@ const ThongTinCaNhan: React.FC =() => {
                     </IonRow>
                 </IonToolbar>
             </IonHeader>
-            <IonContent>
+            <IonContent class="thongtincanhan">
                 <IonItem>Cá nhân</IonItem>
                 <IonItemGroup>
                     <IonLabel class="label">Họ tên</IonLabel>
@@ -104,9 +104,9 @@ const ThongTinCaNhan: React.FC =() => {
                     <IonInput class="input" id="email" value={userInfo.email} onIonChange = {e=> userInfo.email = e.detail.value}></IonInput>
                     <IonLabel class="label">Số điện thoại</IonLabel>
                     <IonInput class="input" id="phone" value={userInfo.phone} onIonChange = {e=> userInfo.phone = e.detail.value}></IonInput>
-                    {/* <IonLabel class="label">Ngày sinh</IonLabel> */}
-                    <IonInput class="input" id="birthday" type="date" value={userInfo.birthday} onIonChange = {e=> userInfo.birthday = String(e.detail.value)}>
-                    </IonInput>
+                    <IonLabel class="label">Ngày sinh</IonLabel>
+                    <IonInput class="input" id="birthday" type="date" value={userInfo.birthday} onIonChange = {e=> userInfo.birthday = String(e.detail.value)}></IonInput>
+                    <IonLabel class="label">Giới tính</IonLabel>
                     <IonRadioGroup class="gender_group" id="gender" value={userInfo.gender} onIonChange = {e=> userInfo.gender = e.detail.value}>
                         <IonRadio value="MALE"></IonRadio>
                         <IonText class="gender">Nam</IonText>
@@ -115,9 +115,7 @@ const ThongTinCaNhan: React.FC =() => {
                         <IonRadio value="ORTHER"></IonRadio>
                         <IonText class="gender">Khác</IonText>
                     </IonRadioGroup>
-                    <IonItem>
-                        <IonButton class="save_button" onClick={save}>Lưu thay đổi</IonButton>
-                    </IonItem>
+                    <IonButton class="save_button" onClick={save}>Lưu thay đổi</IonButton>
                 </IonItemGroup>
             </IonContent>
         </IonPage>
