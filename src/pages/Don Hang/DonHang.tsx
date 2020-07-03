@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonViewDidEnter, IonGrid, IonRow, IonCol, IonButton, IonButtons } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonViewDidEnter, IonGrid, IonRow, IonCol, IonButton, IonButtons, IonLabel } from '@ionic/react';
 import './DonHang.css';
 import { isLogin } from '../../util/account';
 import { Redirect } from 'react-router';
@@ -8,11 +8,17 @@ import { convertOrderStatus } from '../../util/converter';
 
 const DonHang:React.FC = () =>{
 
+  const [loading, setLoading] = useState(true);
   const [orders, setOrders] = useState([]);
   const [orderCount, setOrderCount] = useState(0);
+  const [isAuthenticated, setAuthenticated] = useState(false);
 
   useIonViewDidEnter(async () => {
+    setLoading(true);
     loadData();
+    let authen = await isLogin();
+    setAuthenticated(authen);
+    setLoading(false);
   });
 
   const loadData = async () => {
@@ -28,9 +34,12 @@ const DonHang:React.FC = () =>{
         if(orderCount) {
           setOrderCount(parseInt(orderCount));
         }
-        console.log(JSON.stringify(orders));
     }
   };
+
+  const goto_HomePage = () => {
+    window.location.replace("/trangchu");
+  }
 
   const goToDetailPage = (orderID: any) => {
     window.location.replace("/donhang/" + orderID);
@@ -38,7 +47,7 @@ const DonHang:React.FC = () =>{
 
   const orderBlock = orders.map((order) => {
     return (
-      <IonRow onClick={() => goToDetailPage(order["order"]["id"])}>
+      <IonRow key={order["order"]["id"]} onClick={() => goToDetailPage(order["order"]["id"])}>
         <IonCol>{order["order"]["id"]}</IonCol>
         <IonCol>{order["order"]["order_date"]["dayOfMonth"] + "-" 
         + order["order"]["order_date"]["monthValue"] + "-" 
@@ -52,27 +61,52 @@ const DonHang:React.FC = () =>{
 
     );
   })
+  
   return (
-     <IonPage>
+    (!isAuthenticated && !loading) ?
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Danh sách đơn hàng</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <IonButton href="/canhan" class="goto_login">
+          Đăng nhập để xem danh sách đơn hàng
+        </IonButton>
+      </IonContent>
+    </IonPage>
+    : loading ? 
+    <IonPage>
+      <IonHeader></IonHeader>
+      <IonContent></IonContent>
+    </IonPage>
+    :<IonPage>
       <IonHeader>
         <IonToolbar>
           <IonTitle>Danh Sách Đơn Hàng</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <IonRow>
+          <IonLabel>Tổng số đơn hàng: {orderCount}</IonLabel>
+        </IonRow>
         <IonGrid>
-          <IonRow>
+          <IonRow class="block_header">
             <IonCol>Mã đơn hàng</IonCol>
             <IonCol>Ngày mua</IonCol>
-            <IonCol>Ngày giao (dự kiến)</IonCol>
+            <IonCol>Ngày giao</IonCol>
             <IonCol>Trị giá</IonCol>
             <IonCol>Trạng thái</IonCol>
           </IonRow>
           {orderBlock}
         </IonGrid>
-        <IonButtons>
-          <IonButton ion-button item-end href="/trangchu">Tiếp tục mua sắm</IonButton>
-        </IonButtons>
+        <IonRow>
+          <IonCol></IonCol>
+          <IonCol>
+            <IonButton ion-button item-end onClick={goto_HomePage}>Tiếp tục mua sắm</IonButton>
+          </IonCol>
+        </IonRow>
       </IonContent>
     </IonPage>
   );

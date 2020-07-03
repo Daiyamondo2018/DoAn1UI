@@ -13,3 +13,14 @@
     color: gray;
     margin: 5px 0px;
 }
+
+.content .full_image {
+    width: 90% !important;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5px !important;
+}
+
+.content .welcome {
+    text-align: center !important;
+}

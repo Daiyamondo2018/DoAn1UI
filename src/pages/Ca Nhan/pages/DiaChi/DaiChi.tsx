@@ -3,6 +3,8 @@ import './DiaChi.css';
 import { IonPage, IonHeader, IonToolbar, IonRow, IonIcon, IonCol, IonTitle, IonContent, IonGrid, IonLabel, IonInput, IonButton, useIonViewDidEnter } from '@ionic/react';
 import { arrowBackOutline } from 'ionicons/icons';
 import { getCookie } from '../../../../util/cookie';
+import { isLogin } from '../../../../util/account';
+import { Redirect } from 'react-router';
 
 
 export class ChiTietDiaChi {
@@ -21,6 +23,8 @@ const DiaChi: React.FC = () => {
 
     const [addresses, setAddresses] = useState<ChiTietDiaChi[]>([]);
     const [address, setAddress] = useState(new ChiTietDiaChi());
+    const [login, setLogin]  = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const convertAddressToData = (adsress: ChiTietDiaChi) => {
         return {
@@ -35,7 +39,9 @@ const DiaChi: React.FC = () => {
     }
 
     useIonViewDidEnter(async () => {
+        setLoading(true);
         loadAddresses();
+        setLoading(false);
     })
 
     const loadAddresses = async () => {
@@ -46,6 +52,7 @@ const DiaChi: React.FC = () => {
 
         if (response.ok) {
             const addresses_ = await response.json();
+            setLogin(true);
             setAddresses(addresses_);
             if(addresses_[0]) {
                 console.log("SDSDSSSF")
@@ -82,6 +89,7 @@ const DiaChi: React.FC = () => {
     }
 
     return (
+        (loading || login) ?
         <IonPage>
             <IonHeader class="header">
                 <IonToolbar>
@@ -112,7 +120,8 @@ const DiaChi: React.FC = () => {
                     <IonButton class="save_button" onClick={save_Address}>Lưu</IonButton>
                 </IonGrid>
             </IonContent>
-        </IonPage>
+        </IonPage> 
+        : <Redirect to="/canhan"></Redirect>
     )
 }
 

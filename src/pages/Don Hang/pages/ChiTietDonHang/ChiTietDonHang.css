@@ -1,0 +1,19 @@
+.chitietdonhang .row_title {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.chitietdonhang .label {
+    color: royalblue !important;
+    margin: 5px;
+    padding: 5px;
+    width: 30%;
+}
+
+.chitietdonhang .input {
+    /* width: 90% !important; */
+    border: solid papayawhip 1px !important;
+    border-radius: 5px;
+    margin-left: 5%;
+    margin-right: 5%;
+}

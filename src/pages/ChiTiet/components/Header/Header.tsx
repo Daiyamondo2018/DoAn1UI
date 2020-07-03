@@ -29,8 +29,7 @@ class Header extends Component{
     }
 
     goback() {
-        // window.location.replace("/trangchu");
-        window.history.back();
+        window.location.replace("/trangchu");
     }
     render() {
         let cartItems = getCart();

@@ -117,6 +117,7 @@ const OverviewBlock: React.FC<Props> = (prop)=> {
                         return (
                         <IonRow class="promotion" key={promotion.id}>
                             <IonImg class="image" title={promotion.name} src={"/api/images/200/promotions/" + promotion.id +"/" + promotion.alt +".jpg"}></IonImg>
+                            <IonCol></IonCol>
                             <IonCol><IonLabel className="ion-text-wrap">{promotion.name + " " + promotion.price.toLocaleString() + "đ"}</IonLabel></IonCol>
                         </IonRow>
                     ) })

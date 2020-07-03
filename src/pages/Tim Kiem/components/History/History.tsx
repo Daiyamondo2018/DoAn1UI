@@ -9,7 +9,7 @@ const History:React.FC = () => {
     const [removed, setRemoved] = useState(false);
     let names = [];
     names = getArrayfromLocalStorage("names"); 
-    let temp = String(names);
+    let temp = names ? String(names) : "";
     names = temp.split(",");
 
     const clearHistory = () => {

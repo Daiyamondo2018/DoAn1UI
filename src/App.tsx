@@ -43,6 +43,7 @@ import GioHang from './pages/Gio Hang/GioHang';
 import DatHang from './pages/DatHang/DatHang';
 import DiaChi from './pages/Ca Nhan/pages/DiaChi/DaiChi';
 import ChiTietDonHang from './pages/Don Hang/pages/ChiTietDonHang/ChiTietDonHang';
+import TaiKhoan from './pages/Ca Nhan/pages/TaiKhoan/TaiKhoan';
 const App: React.FC = () => (
   <IonApp style={{backgroundColor: "white"}}>
     <IonReactRouter>
@@ -56,7 +57,8 @@ const App: React.FC = () => (
           <Route path="/dathang" component={DatHang} exact={true}/>
           <Route path="/donhang" component={DonHang} exact={true}/>
           <Route path="/donhang/:id" component={ChiTietDonHang} exact={true}/>        
-          <Route path="/canhan" component={CaNhan}/>
+          <Route path="/canhan" component={CaNhan} exact={true}/>
+          <Route path="/taikhoan" component={TaiKhoan} exact={true}></Route>
           <Route path="/diachi" component={DiaChi} exact={true}></Route>
           <Route path="/thongtincanhan" component={ThongTinCaNhan}/>
           <Route path="/ketqua" component={KetQua}/>

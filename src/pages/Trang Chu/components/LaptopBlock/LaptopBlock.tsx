@@ -67,7 +67,6 @@ export class Promotion {
 const LaptopBlock:React.FC = (props: any)=>{
 
     const [items, setItems] = useState<Laptop[]>([]);
-    console.log(props.url);
 
     useIonViewDidEnter(async () => {
         await fetchData(props.url);

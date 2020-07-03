@@ -1,24 +1,10 @@
-.header {
-    background-color: royalblue !important;
-}
-
-.back {
-    margin: 10px !important;
-}
-
-.title {
-    text-align: center !important;
-    color: white !important;
-    background-color: transparent !important;
-}
-
-.diachi .label {
+.taikhoan .label {
     color: royalblue !important;
     margin: 5px;
     padding: 5px;
 }
 
-.diachi .input {
+.taikhoan .input {
     width: 90% !important;
     border: solid papayawhip 1px !important;
     border-radius: 5px;
@@ -26,11 +12,16 @@
     margin-right: 5%;
 }
 
-.diachi  .save_button {
+.taikhoan  .save_button {
     margin-top: 10px;
     margin-left: 5%;
     margin-right: 5%;
     width: 90%;
     color: white;
     --background: red !important;
+}
+
+.taikhoan .eye {
+    position: absolute;
+    right: 5px;
 }

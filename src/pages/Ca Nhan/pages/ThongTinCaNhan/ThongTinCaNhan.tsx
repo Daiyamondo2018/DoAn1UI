@@ -90,7 +90,7 @@ const ThongTinCaNhan: React.FC =() => {
                     <IonRow>
                     <IonIcon class="back" icon={arrowBackOutline} onClick={goback}></IonIcon>
                     <IonCol>
-                        <IonTitle class="title">Thông tin tài khoản</IonTitle>
+                        <IonTitle class="title">Thông tin cá nhân</IonTitle>
                     </IonCol>
                     </IonRow>
                 </IonToolbar>
@@ -115,7 +115,7 @@ const ThongTinCaNhan: React.FC =() => {
                         <IonRadio value="ORTHER"></IonRadio>
                         <IonText class="gender">Khác</IonText>
                     </IonRadioGroup>
-                    <IonButton class="save_button" onClick={save}>Lưu thay đổi</IonButton>
+                    <IonButton class="save_button" onClick={save}>Lưu</IonButton>
                 </IonItemGroup>
             </IonContent>
         </IonPage>

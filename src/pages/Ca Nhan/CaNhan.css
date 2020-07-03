@@ -46,8 +46,13 @@
     margin-right: 5%;
 }
 
+.content .eye {
+    position: absolute;
+    right: 5px;
+}
+
 .signup_button, .login_button, .logout_button, .xacnhan_button {
-    margin-top: 5px;
+    margin-top: 10px;
     margin-left: 5%;
     margin-right: 5%;
     width: 90%;

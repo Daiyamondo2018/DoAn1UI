@@ -36,6 +36,17 @@ export const convertResolutionType = (type:String) => {
     }
 };
 
+export const convertTypeToQueryType = (type: String) => {
+    switch(type) {
+        case "Giá rẻ":
+            return "cheap";
+        case "Sản phẩm mới":
+            return "new";
+        default:
+            return "common";
+    }
+}
+
 export const convertBrandType = (type:String) => {
     return type === "MSI" ? "MSI" : type.charAt(0) + type.slice(1).toLowerCase();
 };

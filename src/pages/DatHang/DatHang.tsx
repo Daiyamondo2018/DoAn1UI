@@ -3,20 +3,20 @@ import './DatHang.css';
 import { IonPage, withIonLifeCycle, IonTitle, useIonViewDidEnter, IonGrid, IonRow, IonContent, IonCol, IonLabel, IonInput, IonButton, IonIcon, IonCard, IonButtons } from '@ionic/react';
 import Header from '../ChiTiet/components/Header/Header';
 import { getCart, removeFromCart } from '../../util/cart';
-import { Laptop } from '../Trang Chu/components/LaptopBlock/LaptopBlock';
+import { Laptop, Promotion } from '../Trang Chu/components/LaptopBlock/LaptopBlock';
 import { cart } from 'ionicons/icons';
-import { getCookie } from '../../util/cookie';
+import { getCookie, putArraytoLocalStorage } from '../../util/cookie';
 import {ChiTietDiaChi} from '../Ca Nhan/pages/DiaChi/DaiChi';
 
 const DatHang: React.FC = () => {
 
-    const [changeData, setDataChange] = useState(false);
     const [products, setProducts] = useState<Laptop[]>([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalDiscount, setTotalDiscount] = useState(0);
     const [totalNumber, setTotalNumber] = useState(0);
     const [addresses, setAddresses] = useState<ChiTietDiaChi[]>([]);
     const [address, setAddress] = useState(new ChiTietDiaChi());
+    const [promotions, setPromotions] = useState<Promotion[]>([]);
 
     useIonViewDidEnter(async () => {
         fetchData();
@@ -36,7 +36,7 @@ const DatHang: React.FC = () => {
             loadCart(products);
         }
 
-        loadAddresses();
+        await Promise.all([loadAddresses(), loadPromotions()]);
     }
 
     const loadCart = (products: Laptop[]) => {
@@ -66,6 +66,21 @@ const DatHang: React.FC = () => {
         setProducts(products);
         setTotalNumber(totalNumber);
     }
+
+    const loadPromotions = async () => {
+        const cart = getCart();        
+
+        Object.keys(cart).forEach(async (id) => {
+            const response = await fetch("/api/laptops/" + id + "/promotions");
+            if (response.ok) {
+                const data = await response.json();
+                let oldPromotions = promotions;
+                let newPromotions = oldPromotions.concat(data);
+                setPromotions(newPromotions);
+            }
+        });
+    };
+
 
     const loadAddresses = async () => {
         const response = await fetch("/api/users/me/addresses", {
@@ -101,6 +116,19 @@ const DatHang: React.FC = () => {
          : "")
     });
 
+    const promotionBlock = promotions.map((promotion) => {
+        console.log("p"+JSON.stringify(promotions));
+        return ((promotions.length > 0) ?
+            <IonGrid key={1}>
+                <IonRow>
+                    <IonCol>{promotion.name}</IonCol>
+                    <IonCol>{promotion.price.toLocaleString() + " đ"}</IonCol>
+                </IonRow>
+            </IonGrid>
+            : ""
+        );
+    })
+
     let date = new Date();
     let sendDate = new Date();
     sendDate.setDate(date.getDate() + 5);
@@ -124,7 +152,8 @@ const DatHang: React.FC = () => {
         });
 
         if (response.ok) {
-            localStorage.setItem("cart", "");
+            alert("Đặt mua thành công");
+            putArraytoLocalStorage("cart", []);
             window.location.replace("/donhang");
         }
     };
@@ -171,11 +200,21 @@ const DatHang: React.FC = () => {
                     <IonCol>Thành tiền</IonCol>
                 </IonRow>
                 {items}
+                <IonRow></IonRow>
+                <IonRow class="row_title">
+                    <IonCol>DANH SÁCH KHUYẾN MÃI</IonCol>
+                </IonRow>
+                <IonRow></IonRow>
+                <IonRow>
+                    <IonCol>Tên quà tặng</IonCol>
+                    <IonCol>Giá trị</IonCol>
+                </IonRow>
+                {promotionBlock}
                 <IonRow>
                     <IonCol>Tổng cộng:</IonCol>
                     <IonCol></IonCol>
                     <IonCol>{totalNumber}</IonCol>
-                    <IonCol>{totalPrice}</IonCol>
+                    <IonCol>{totalPrice.toLocaleString() + " đ"}</IonCol>
                 </IonRow>
                 <IonRow>
                     <IonCol>Kiểm tra kỹ thông tin trước khi đặt mua</IonCol>

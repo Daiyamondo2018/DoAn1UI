@@ -1,5 +1,5 @@
-import React, { Component, useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRow, withIonLifeCycle, useIonViewDidEnter, IonImg, IonCol, IonIcon, IonLabel, IonText, IonInput, IonButton } from '@ionic/react';
+import React, { useState } from 'react';
+import { IonContent, IonHeader, IonPage, IonToolbar, IonRow, withIonLifeCycle, useIonViewDidEnter, IonImg, IonCol, IonIcon, IonInput, IonButton, IonTitle } from '@ionic/react';
 import './GioHang.css';
 import { getCart, removeFromCart, addToCart } from '../../util/cart';
 import { Laptop } from '../Trang Chu/components/LaptopBlock/LaptopBlock';
@@ -18,23 +18,26 @@ const GioHang:React.FC = () =>{
 
   const fetchData = async () => {
     const cart = getCart();
-        if (Object.keys(cart).length === 0) {
-            return;
-        }
+    if (Object.keys(cart).length === 0) {
+      setTotalPrice(0);
+      setTotalDiscount(0);
+      return;
+    }
 
-        const params = new URLSearchParams();
-        Object.keys(cart).forEach((id) => params.append("ids", id));
-        const response = await fetch("/api/laptops?" + params.toString());
+    const params = new URLSearchParams();
+    Object.keys(cart).forEach((id) => params.append("ids", id));
+    const response = await fetch("/api/laptops?" + params.toString());
 
-        if (response.ok) {
-            const products = await response.json();
-            loadCart(products);
-        }
+    if (response.ok) {
+        const products = await response.json();
+        loadCart(products);
+    }
   }
 
   const click = () => {
     setDataChange(!changeData);
     fetchData();
+    setDataChange(!changeData);
     console.log("clicked");
   }
 
@@ -78,7 +81,7 @@ const GioHang:React.FC = () =>{
       <IonHeader>
         <IonToolbar>
           <IonRow>
-            <IonCol>Giỏ Hàng</IonCol>
+            <IonTitle>Giỏ hàng</IonTitle>
             <IonCol>
               <IonButton href="/dathang" disabled={(totalPrice==0)}>
                 <IonIcon icon={cart}></IonIcon>
@@ -128,8 +131,8 @@ export const ProductItem:  React.FC<Props> = props => {
 
   const increaseQuantity = () => {
     addToCart(product.id, 1);
-    setDataChange(!changeData);
     props.click();
+    setDataChange(!changeData);
   }
 
   const removeItem = () => {

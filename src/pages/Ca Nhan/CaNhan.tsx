@@ -1,14 +1,10 @@
-import React, { Component, useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonIcon, IonButtons, IonModal, IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonLabel, IonItem, IonImg, IonItemGroup, withIonLifeCycle, IonInput, IonRouterLink, IonSelect, IonSelectOption, IonText } from '@ionic/react';
+import React, { useState } from 'react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonIcon, IonButtons, IonModal, IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonLabel, IonItem, IonImg, IonItemGroup, withIonLifeCycle, IonInput, IonRouterLink, IonSelect, IonSelectOption, IonText, useIonViewDidEnter } from '@ionic/react';
 import './CaNhan.css';
-import { cart, close, home, alertOutline } from 'ionicons/icons';
+import { cart, close, home, alertOutline, eyeOutline } from 'ionicons/icons';
 import { IonReactRouter } from '@ionic/react-router';
 import { Route } from 'react-router';
-// import DangNhap from '../Dang Nhap/DangNhap';
-// import DangKy from '../Dang Ky/DangKy';
-// import QuenMatKhau from '../QuenMatKhau/QuenMatKhau';
 import { createCookie, getCookie, removeCookie } from '../../util/cookie';
-import ThongTinCaNhan from './pages/ThongTinCaNhan/ThongTinCaNhan';
 import { getCart, updateCart } from '../../util/cart';
 
 const CaNhan: React.FC = ()=>{
@@ -29,27 +25,27 @@ const CaNhan: React.FC = ()=>{
     return null;
   };
 
-  const token = fetchToken();
+  useIonViewDidEnter(async () => {
+    fetchToken();
+  })
 
   const logout = async () => {
     removeCookie("access_token");
-    window.location.href = "/canhan/dangnhap";
+    window.location.href = "/canhan";
   }
-
   let cartItems = getCart();
   updateCart(cartItems);
-
   return (
     <IonPage>
       <IonHeader>
           <IonToolbar>
             <IonButtons>
-              {(isLogin==false) && <IonTitle size="large">Cá Nhân</IonTitle>}
-              {(isLogin==true) && <IonTitle size="large">Thông tin Tài khoản</IonTitle>}
+              {(isLogin==false) && <IonTitle size="large">Cá nhân</IonTitle>}
+              {(isLogin==true) && <IonTitle size="large">Thông tin cá nhân</IonTitle>}
               <IonButton href="/giohang" ion-button item-end>
-                <IonIcon class="cart" icon={cart}>
-                </IonIcon>
-                <IonText id = "cart_count"></IonText>
+                  <IonIcon class="cart" icon={cart}>
+                  </IonIcon>
+                  <IonText id = "cart_count"></IonText>
               </IonButton>
             </IonButtons>
           </IonToolbar>
@@ -95,6 +91,14 @@ const CaNhan: React.FC = ()=>{
         </IonItem>
         }
         {(isLogin==true) && <IonItemGroup>
+
+        <IonItem class="login_signup" onClick={()=>{window.location.replace("/taikhoan")}}>
+          <IonImg class="profile_picture" src="http://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/42/d5/af/42d5afc2-b3d3-56ad-1650-018544ec1079/AppIcon-1x_U007emarketing-0-7-0-0-85-220.png/1200x630wa.png"></IonImg>
+          <IonItemGroup>
+            <IonLabel class="static">Chào mừng bạn trở lại với UIT store </IonLabel>
+            <IonLabel class="login_label static">Đổi mật khẩu</IonLabel>
+          </IonItemGroup>
+        </IonItem>
         <IonItem class="login_signup" onClick={()=>{window.location.replace("/thongtincanhan")}}>
           <IonImg class="profile_picture" src="http://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/42/d5/af/42d5afc2-b3d3-56ad-1650-018544ec1079/AppIcon-1x_U007emarketing-0-7-0-0-85-220.png/1200x630wa.png"></IonImg>
           <IonItemGroup>
@@ -122,6 +126,7 @@ const DangNhap: React.FC = () =>{
 
   const [error, setError] = useState(String);
   const [submitted, setSubmitted] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const login = async () => {
       setError("");
       setSubmitted(true);
@@ -160,7 +165,12 @@ const DangNhap: React.FC = () =>{
             <IonLabel class="label">Tên đăng nhập</IonLabel>
             <IonInput id="username" class="input" placeholder="Tên đăng nhập"/>
             <IonLabel class="label">Mật khẩu</IonLabel>
-            <IonInput id="password" class="input" type="password" placeholder="Mặt khẩu"/>
+            <IonInput id="password" class="input" placeholder="Mặt khẩu"
+              type = {showPassword ? "text" : "password"}>
+              <IonIcon class="eye" size="large" item-end icon={eyeOutline}
+                onClick={e => setShowPassword(!showPassword)} >
+              </IonIcon>
+            </IonInput>
             <IonButton class="login_button" onClick={login}>Đăng Nhập</IonButton>
           </IonContent>
       </IonPage>
@@ -177,6 +187,8 @@ const DangKy: React.FC = () =>{
   const [password, setPassword] = useState(String);
   const [repassword, setRePassword] = useState(String);
   const [birthday, setBirthday] = useState(Date);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const signup = async () => {
       let body = {
@@ -215,9 +227,19 @@ const DangKy: React.FC = () =>{
           <IonLabel class="label">Tên đăng nhập</IonLabel>
           <IonInput id="username" class="input" placeholder="Tên đăng nhập" onIonChange={e => setUsername(String(e.detail.value))}/>
           <IonLabel class="label">Mật khẩu</IonLabel>
-          <IonInput id="password" class="input" type="password" placeholder="Mật khẩu" onIonChange={e => setPassword(String(e.detail.value))}/>
+          <IonInput id="password" class="input" type= {showPassword ? "text" : "password"} placeholder="Mật khẩu" 
+            onIonChange={e => setPassword(String(e.detail.value))}>
+            <IonIcon class="eye" size="large" item-end icon={eyeOutline}
+              onClick={e => setShowPassword(!showPassword)} >
+            </IonIcon>
+          </IonInput>
           <IonLabel class="label">Nhập lại mật khẩu</IonLabel>
-          <IonInput id="re_password" class="input" type="password" placeholder="Nhập lại mật khẩu" onIonChange={e => setRePassword(String(e.detail.value))}/>
+          <IonInput id="re_password" class="input" type= {showPassword ? "text" : "password"} placeholder="Nhập lại mật khẩu" 
+            onIonChange={e => setRePassword(String(e.detail.value))}>
+            <IonIcon class="eye" size="large" item-end icon={eyeOutline}
+              onClick={e => setShowConfirmPassword(!showConfirmPassword)} >
+            </IonIcon>
+          </IonInput>
           <IonLabel class="label">Giới tính</IonLabel>
           <IonSelect placeholder="Giới tính" okText="Xác nhận" cancelText="Đóng" onIonChange={e => setGender(e.detail.value)}>
               <IonSelectOption value="MALE">Nam</IonSelectOption>

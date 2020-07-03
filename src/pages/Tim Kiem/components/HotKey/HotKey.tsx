@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { IonItem, IonIcon, IonLabel, IonButtons, IonButton, IonItemGroup, IonGrid, IonMenuButton } from '@ionic/react';
 import './HotKey.css';
+import { convertTypeToQueryType } from '../../../../util/converter';
 
 const HotKey:React.FC = () => {
 
@@ -9,17 +10,18 @@ const HotKey:React.FC = () => {
     let hotTypes = ["Giá rẻ", "Sản phảm mới"];
 
     const handleSearchBrand = (item: string) => {
-        let url ="/ketqua?type=brand" + "&value=" + item;
+        let url ="/ketqua?brand=" + item;
         window.location.replace(url);
     }
 
     const handleSearchDemand = (item: string) => {
-        let url ="/ketqua?type=demand" + "&value=" + item;
+        let url ="/ketqua?demand=" + item;
         window.location.replace(url);
     }
 
     const handleSearchType = (item: string) => {
-        let url ="/types/" + item;
+        let url ="/ketqua?type=" + convertTypeToQueryType(item);
+        window.location.replace(url);
     }
 
     const hotBrandBlock = hotBrands.map((item)=> {
