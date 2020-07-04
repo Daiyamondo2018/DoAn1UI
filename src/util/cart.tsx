@@ -43,12 +43,13 @@ export const updateCart = (cart: any) => {
 
 export const updateCartQuantity = (cart: any) => {
     if(cart) {
-        localStorage.setItem("cart", JSON.stringify(cart));
-        const cartQuantity = document.getElementById("cart_count");
-        if(cartQuantity) {
-            var quantity = Object.values(cart).reduce((a: any, b: any) => a + b, 0);
-            cartQuantity.innerText = String(quantity);
+        var quantity = Object.values(cart).reduce((a: any, b: any) => a + b, 0);
+        var count = (document.getElementById("cart_count") as HTMLIonTextElement);
+        if(count){
+            console.log("Cart" + JSON.stringify(cart));
+            count.innerText = String(quantity);
         }
+        localStorage.setItem("cart", JSON.stringify(cart));
     }
 };
 

@@ -9,7 +9,12 @@
     display: none;
 }
 
-.title {
+.content .title {
+    color: #000000 !important;
     margin: 5px;
     color: darkred;
+}
+
+.content .laptop .name {
+    color: #000000 !important;
 }

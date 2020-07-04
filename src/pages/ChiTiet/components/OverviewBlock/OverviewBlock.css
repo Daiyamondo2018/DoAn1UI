@@ -1,4 +1,4 @@
-.product_image {
+.chitiet .product_image {
     margin-left: 5%;
     margin-right: 5%;
     height: 400px;
@@ -6,13 +6,13 @@
     object-fit: fill !important;
 }
 
-.product_name {
+.chitiet .product_name {
     font-size: 18px;
     margin-left: 10px;
     margin-top: 5px;
 }
 
-.current_price {
+.chitiet .current_price {
     margin-top: 5px;
     margin-left: 10px;
     color: red !important;
@@ -20,28 +20,34 @@
     font-weight: bold;
 }
 
-.unit_price {
+.chitiet .unit_price {
     margin-top: 5px !important;
     margin-left: 10px !important;
     text-decoration: line-through;
 }
 
-.discount_price {
+.chitiet .discount_price {
     margin-top: 5px !important;
     margin-left: 10px !important;
     font-style: italic;
 }
 
-.label {
+.chitiet .label {
+    color: black;
     text-align: left !important;
     vertical-align: middle !important;
 }
 
-.promotion {
+.chitiet .promotion {
     margin: 5px !important;
     height: 60px !important;
 }
 
-.image {
+.chitiet .image {
     height: 60px !important;
+}
+
+.chitiet .title {
+    color: #000000 !important;
+    font-size: 24px !important;
 }

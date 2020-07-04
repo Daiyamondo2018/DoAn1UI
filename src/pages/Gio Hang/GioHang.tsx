@@ -82,8 +82,8 @@ const GioHang:React.FC = () =>{
         <IonToolbar>
           <IonRow>
             <IonTitle>Giỏ hàng</IonTitle>
-            <IonCol>
-              <IonButton href="/dathang" disabled={(totalPrice==0)}>
+            <IonCol class="giohang_header">
+              <IonButton class="pay" href="/dathang" disabled={(totalPrice==0)}>
                 <IonIcon icon={cart}></IonIcon>
                 Tiến hành đặt hàng
               </IonButton>
@@ -97,7 +97,10 @@ const GioHang:React.FC = () =>{
         <IonCol>Tổng giảm giá: {totalDiscount.toLocaleString()+" đ"}</IonCol>  
         </IonRow>
         {items}
-        <IonButton href="/trangchu">Tiếp tục mua sắm</IonButton>
+        <IonRow>
+          <IonCol></IonCol>
+          <IonCol><IonButton href="/trangchu">Tiếp tục mua sắm</IonButton></IonCol>
+        </IonRow>
       </IonContent>
     </IonPage>
   );

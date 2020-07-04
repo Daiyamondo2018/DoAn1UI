@@ -4,12 +4,13 @@ import './CaNhan.css';
 import { cart, close, home, alertOutline, eyeOutline } from 'ionicons/icons';
 import { IonReactRouter } from '@ionic/react-router';
 import { Route } from 'react-router';
-import { createCookie, getCookie, removeCookie } from '../../util/cookie';
-import { getCart, updateCart } from '../../util/cart';
+import { createCookie, getCookie, removeCookie, getArrayfromLocalStorage, putArraytoLocalStorage } from '../../util/cookie';
+import { getCart, updateCart, updateCartQuantity } from '../../util/cart';
 
 const CaNhan: React.FC = ()=>{
   const [showModal, setShowModal] = useState(false);
   const [isLogin, setLogin] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchToken = async () => {
     const token = getCookie("access_token");
@@ -26,30 +27,33 @@ const CaNhan: React.FC = ()=>{
   };
 
   useIonViewDidEnter(async () => {
+    setLoading(true);
     fetchToken();
+    setLoading(false);
   })
 
+  let cartItems = getCart();
+  const quantity = String(Object.values(cartItems).reduce((a: any, b: any) => a + b, 0));
   const logout = async () => {
     removeCookie("access_token");
     window.location.href = "/canhan";
   }
-  let cartItems = getCart();
-  updateCart(cartItems);
+  
   return (
     <IonPage>
-      <IonHeader>
-          <IonToolbar>
-            <IonButtons>
-              {(isLogin==false) && <IonTitle size="large">Cá nhân</IonTitle>}
-              {(isLogin==true) && <IonTitle size="large">Thông tin cá nhân</IonTitle>}
-              <IonButton href="/giohang" ion-button item-end>
-                  <IonIcon class="cart" icon={cart}>
-                  </IonIcon>
-                  <IonText id = "cart_count"></IonText>
-              </IonButton>
-            </IonButtons>
-          </IonToolbar>
-        </IonHeader>
+      <IonHeader class="header"> 
+        <IonToolbar class="header_toolbar">
+          <IonButtons>
+            {(isLogin==false) && <IonTitle size="large">Cá nhân</IonTitle>}
+            {(isLogin==true) && <IonTitle size="large">Thông tin cá nhân</IonTitle>}
+            <IonButton href="/giohang" ion-button item-end>
+                <IonIcon class="cart" icon={cart}>
+                </IonIcon>
+                <IonText id = "cart_count">{quantity}</IonText>
+            </IonButton>
+          </IonButtons>
+        </IonToolbar>
+      </IonHeader>
       <IonContent>
       <IonModal isOpen={showModal} onDidDismiss={()=>{setShowModal(false)}}>
         <IonReactRouter>
@@ -81,7 +85,7 @@ const CaNhan: React.FC = ()=>{
             </IonTabs>
           </IonReactRouter>
       </IonModal>
-      {(isLogin==false) && 
+      {(isLogin==false && !loading) ?
         <IonItem class="login_signup" onClick={() => setShowModal(true)}>
           <IonImg class="profile_picture" src="http://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/42/d5/af/42d5afc2-b3d3-56ad-1650-018544ec1079/AppIcon-1x_U007emarketing-0-7-0-0-85-220.png/1200x630wa.png"></IonImg>
           <IonItemGroup>
@@ -89,33 +93,31 @@ const CaNhan: React.FC = ()=>{
             <IonLabel class="login_label static">Đăng nhập/Đăng ký</IonLabel>
           </IonItemGroup>
         </IonItem>
-        }
-        {(isLogin==true) && <IonItemGroup>
-
-        <IonItem class="login_signup" onClick={()=>{window.location.replace("/taikhoan")}}>
-          <IonImg class="profile_picture" src="http://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/42/d5/af/42d5afc2-b3d3-56ad-1650-018544ec1079/AppIcon-1x_U007emarketing-0-7-0-0-85-220.png/1200x630wa.png"></IonImg>
-          <IonItemGroup>
-            <IonLabel class="static">Chào mừng bạn trở lại với UIT store </IonLabel>
-            <IonLabel class="login_label static">Đổi mật khẩu</IonLabel>
-          </IonItemGroup>
-        </IonItem>
-        <IonItem class="login_signup" onClick={()=>{window.location.replace("/thongtincanhan")}}>
-          <IonImg class="profile_picture" src="http://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/42/d5/af/42d5afc2-b3d3-56ad-1650-018544ec1079/AppIcon-1x_U007emarketing-0-7-0-0-85-220.png/1200x630wa.png"></IonImg>
-          <IonItemGroup>
-            <IonLabel class="static">Chào mừng bạn trở lại với UIT store </IonLabel>
-            <IonLabel class="login_label static">Xem thông tin cá nhân</IonLabel>
-          </IonItemGroup>
-        </IonItem>
-        <IonItem class="login_signup" onClick={()=>{window.location.replace("/diachi")}}>
-          <IonImg class="profile_picture" src="http://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/42/d5/af/42d5afc2-b3d3-56ad-1650-018544ec1079/AppIcon-1x_U007emarketing-0-7-0-0-85-220.png/1200x630wa.png"></IonImg>
-          <IonItemGroup>
-            <IonLabel class="static">Chào mừng bạn trở lại với UIT store </IonLabel>
-            <IonLabel class="login_label static">Xem thông địa chỉ</IonLabel>
-          </IonItemGroup>
-        </IonItem>
-        <IonButton class="logout_button" onClick={logout}>Đăng xuất</IonButton>
-        </IonItemGroup>
-      }
+        : loading ? <IonItem>Loading...</IonItem>
+        :<IonItemGroup>
+          <IonItem class="login_signup" onClick={()=>{window.location.replace("/taikhoan")}}>
+            <IonImg class="profile_picture" src="http://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/42/d5/af/42d5afc2-b3d3-56ad-1650-018544ec1079/AppIcon-1x_U007emarketing-0-7-0-0-85-220.png/1200x630wa.png"></IonImg>
+            <IonItemGroup>
+              <IonLabel class="static">Chào mừng bạn trở lại với UIT store </IonLabel>
+              <IonLabel class="login_label static">Đổi mật khẩu</IonLabel>
+            </IonItemGroup>
+          </IonItem>
+          <IonItem class="login_signup" onClick={()=>{window.location.replace("/thongtincanhan")}}>
+            <IonImg class="profile_picture" src="http://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/42/d5/af/42d5afc2-b3d3-56ad-1650-018544ec1079/AppIcon-1x_U007emarketing-0-7-0-0-85-220.png/1200x630wa.png"></IonImg>
+            <IonItemGroup>
+              <IonLabel class="static">Chào mừng bạn trở lại với UIT store </IonLabel>
+              <IonLabel class="login_label static">Xem thông tin cá nhân</IonLabel>
+            </IonItemGroup>
+          </IonItem>
+          <IonItem class="login_signup" onClick={()=>{window.location.replace("/diachi")}}>
+            <IonImg class="profile_picture" src="http://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/42/d5/af/42d5afc2-b3d3-56ad-1650-018544ec1079/AppIcon-1x_U007emarketing-0-7-0-0-85-220.png/1200x630wa.png"></IonImg>
+            <IonItemGroup>
+              <IonLabel class="static">Chào mừng bạn trở lại với UIT store </IonLabel>
+              <IonLabel class="login_label static">Xem thông địa chỉ</IonLabel>
+            </IonItemGroup>
+          </IonItem>
+          <IonButton class="logout_button" onClick={logout}>Đăng xuất</IonButton>
+        </IonItemGroup>}
       </IonContent>
     </IonPage>
   );
@@ -161,6 +163,11 @@ const DangNhap: React.FC = () =>{
   };
   return (
       <IonPage>
+         <IonHeader>
+            <IonTitle class="quen_title">
+              Đăng nhập
+            </IonTitle>
+          </IonHeader>
           <IonContent class="content">
             <IonLabel class="label">Tên đăng nhập</IonLabel>
             <IonInput id="username" class="input" placeholder="Tên đăng nhập"/>
@@ -217,6 +224,11 @@ const DangKy: React.FC = () =>{
   }
   return (
       <IonPage>
+         <IonHeader>
+            <IonTitle class="quen_title">
+              Đăng ký
+            </IonTitle>
+          </IonHeader>
         <IonContent class="content">
           <IonLabel class="label">Họ tên</IonLabel>
           <IonInput id="name" class="input" placeholder="Họ tên" onIonChange={e => setName(String(e.detail.value))}/>
@@ -264,6 +276,7 @@ const QuenMatKhau: React.FC = () =>{
             </IonTitle>
           </IonHeader>
           <IonContent class="content">
+            <IonLabel class="label">Email</IonLabel>
               <IonInput id="email" class="input" placeholder="Email"/>
               <IonButton href="/canhan/dangnhap" class="xacnhan_button">Xác nhận</IonButton>              
           </IonContent>
@@ -271,4 +284,4 @@ const QuenMatKhau: React.FC = () =>{
   );
 }
 
-export default CaNhan;
+export default withIonLifeCycle(CaNhan);

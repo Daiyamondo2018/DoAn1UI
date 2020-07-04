@@ -77,31 +77,31 @@ const OverviewBlock: React.FC<Props> = (prop)=> {
                     </IonRow>                
                 </IonCol>
             </IonRow>
-            <IonLabel id="quantity-error">
+            {/* <IonLabel id="quantity-error">
                 Tối đa {MAXIMUM_QUANTITY_PER_PRODUCT} sản phẩm {product.name} trong giỏ hàng
-            </IonLabel>
+            </IonLabel> */}
             <IonCard>
-                <IonLabel>Thông số cơ bản</IonLabel>
+                <IonLabel class="title">Thông số cơ bản</IonLabel>
                 <IonGrid>
-                    <IonRow>
+                    <IonRow class="label">
                         <IonCol>CPU:</IonCol>
                         <IonCol>{convertCPUType(product.cpu.type) + 
                             " " + product.cpu.detail + " " + product.cpu.speed + " GHz"}
                         </IonCol>
                     </IonRow>
-                    <IonRow>
+                    <IonRow class="label">
                         <IonCol>RAM:</IonCol>
                         <IonCol>{product.ram.size + "GB " + product.ram.type 
                             + " " + product.ram.bus + " MHz"}
                         </IonCol>
                     </IonRow>
-                    <IonRow>
+                    <IonRow class="label">
                         <IonCol>Ổ cứng:</IonCol>
                         <IonCol>{product.hard_drive.size==1024 ? "1 TB" 
                             : product.hard_drive.size + " GB " + product.hard_drive.detail}
                         </IonCol>
                     </IonRow>
-                    <IonRow>
+                    <IonRow class="label">
                         <IonCol>Màn hình:</IonCol>
                         <IonCol>{convertResolutionType(product.monitor.resolution_type + " " 
                             + product.monitor.resolution_width + "x" + product.monitor.resolution_height)}
@@ -110,15 +110,14 @@ const OverviewBlock: React.FC<Props> = (prop)=> {
                 </IonGrid>
             </IonCard>
             <IonCard>
-                <IonLabel>Quà khuyến mãi</IonLabel>
+                <IonLabel class="title">Quà khuyến mãi</IonLabel>
                 {
                     promotions.map((promotion) => { 
                         console.log("promotion: " + JSON.stringify(promotion));
                         return (
                         <IonRow class="promotion" key={promotion.id}>
                             <IonImg class="image" title={promotion.name} src={"/api/images/200/promotions/" + promotion.id +"/" + promotion.alt +".jpg"}></IonImg>
-                            <IonCol></IonCol>
-                            <IonCol><IonLabel className="ion-text-wrap">{promotion.name + " " + promotion.price.toLocaleString() + "đ"}</IonLabel></IonCol>
+                            <IonCol><IonLabel class="label" className="ion-text-wrap">{promotion.name + " " + promotion.price.toLocaleString() + "đ"}</IonLabel></IonCol>
                         </IonRow>
                     ) })
                 }

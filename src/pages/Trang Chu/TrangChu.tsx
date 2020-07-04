@@ -52,10 +52,10 @@ export const TrangChu:React.FC= ()=>{
     <IonPage>
         <Header searchParam=""/>
         <IonContent class="content">
+        <IonTitle class="welcome">Chào mừng bạn đến với UIT store</IonTitle>
           <IonSlides options={options}>
             {advertisementBlock}
           </IonSlides>
-          <IonTitle class="welcome">Chào mừng bạn đến với UIT store</IonTitle>
           <IonTitle class="block_title">Sản phẩm mới</IonTitle>
           <LaptopBlock url="/api/laptops/types/new"/>
           <IonTitle class="block_title">Sản phẩm bán chạy</IonTitle>
@@ -66,6 +66,6 @@ export const TrangChu:React.FC= ()=>{
           <LaptopBlock url="/api/laptops/types/cheap"/>
         </IonContent>
     </IonPage>
-);
+  );
 };
 export default TrangChu;

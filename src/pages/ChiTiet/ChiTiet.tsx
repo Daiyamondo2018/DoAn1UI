@@ -106,8 +106,8 @@ const ChiTiet:React.FC = ()=>{
     return(
         <IonPage>
             <Header/>
-            <IonContent>
-                <IonTitle class="title">Thông tin chi tiết</IonTitle>
+            <IonContent class="chitiet">
+                <IonTitle class="title">Thông Tin Chi Tiết</IonTitle>
                 <OverviewBlock promotions={promotions} item = {item}></OverviewBlock>
                 <DetailBlock item = {item}></DetailBlock>
                 <IonLabel>Sản phẩm khác</IonLabel>

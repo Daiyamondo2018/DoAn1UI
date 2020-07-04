@@ -17,6 +17,8 @@
 
 .login_signup {
     max-height: 80px !important;
+    border:  solid 2px gray;
+    border-radius: 5px;
 }
 
 .login_signup:hover{
@@ -61,6 +63,7 @@
 }
 
 .quen_title {
+    color: #000000;
     text-align: center;
     margin: 10px;
 }

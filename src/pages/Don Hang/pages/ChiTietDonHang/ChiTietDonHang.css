@@ -11,9 +11,13 @@
 }
 
 .chitietdonhang .input {
-    /* width: 90% !important; */
+    color: #000000 !important;
     border: solid papayawhip 1px !important;
     border-radius: 5px;
     margin-left: 5%;
     margin-right: 5%;
+}
+
+.header .title {
+    color: #000000 !important;
 }

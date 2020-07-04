@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { IonHeader, IonToolbar, IonSearchbar, IonTitle, IonIcon, IonButtons, IonButton, IonText } from '@ionic/react';
+import React, { Component, useState } from 'react';
+import { IonHeader, IonToolbar, IonSearchbar, IonTitle, IonIcon, IonButtons, IonButton, IonText, useIonViewDidEnter, withIonLifeCycle } from '@ionic/react';
 import { cart } from 'ionicons/icons';
 import './Header.css';
 import { getArrayfromLocalStorage, putArraytoLocalStorage } from '../../../../util/cookie';
-import { updateCartQuantity, getCart, updateCart } from '../../../../util/cart';
+import { getCart, updateCartQuantity } from '../../../../util/cart';
 
 export type SearchParam = {
     searchParam: string;
@@ -12,6 +12,8 @@ export type SearchParam = {
 const Header:React.FC<SearchParam> = (props) =>{
 
     let searchParam = props.searchParam;
+    let cartItems = getCart();
+    updateCartQuantity(cartItems);
     const goToAnotherPage = (e: React.KeyboardEvent) =>{
         if(e.charCode == 13) {
             let name = String(document.getElementById("searchbar")?.getElementsByTagName("input")[0].value);    
@@ -33,8 +35,6 @@ const Header:React.FC<SearchParam> = (props) =>{
             window.location.replace("/ketqua?name="+name);  
         }
     }
-    let cartItems = getCart();
-    updateCart(cartItems);
     return(
         <IonHeader class="header"> 
             <IonToolbar class="header_toolbar">
@@ -51,4 +51,4 @@ const Header:React.FC<SearchParam> = (props) =>{
     )
 };
 
-export default Header;
+export default withIonLifeCycle(Header);

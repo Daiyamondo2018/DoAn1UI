@@ -10,7 +10,8 @@
 }
 
 .block_title {
-    color: gray;
+    font-weight: bold;
+    color: #000000;
     margin: 5px 0px;
 }
 

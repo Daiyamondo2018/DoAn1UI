@@ -45,7 +45,7 @@ import DiaChi from './pages/Ca Nhan/pages/DiaChi/DaiChi';
 import ChiTietDonHang from './pages/Don Hang/pages/ChiTietDonHang/ChiTietDonHang';
 import TaiKhoan from './pages/Ca Nhan/pages/TaiKhoan/TaiKhoan';
 const App: React.FC = () => (
-  <IonApp style={{backgroundColor: "white"}}>
+  <IonApp class="app">
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
@@ -65,23 +65,23 @@ const App: React.FC = () => (
           <Route path="/" render={() => <Redirect to="/trangchu" />} exact={true} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/trangchu">
+          <IonTabButton tab="tab1" onClick={e=>goTo("/trangchu")} href="/trangchu">
             <IonIcon icon={home} />
             <IonLabel>Trang Chủ</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/danhmuc">
+          <IonTabButton tab="tab2" onClick={e=>goTo("/danhmuc")} href="/danhmuc">
             <IonIcon icon={grid} />
             <IonLabel>Danh Mục</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab3" href="/timkiem">
+          <IonTabButton tab="tab3" onClick={e=>goTo("/timkiem")} href="/timkiem">
             <IonIcon icon={search} />
             <IonLabel>Tìm Kiếm</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab4" href="/donhang">
+          <IonTabButton tab="tab4" onClick={e=>goTo("/donhang")} href="/donhang">
             <IonIcon icon={list} />
             <IonLabel>Đơn Hàng</IonLabel>
           </IonTabButton>         
-          <IonTabButton tab="tab6" href="/canhan">
+          <IonTabButton tab="tab6" onClick={e=>goTo("/canhan")} href="/canhan">
             <IonIcon icon={personCircle} />
             <IonLabel>Cá Nhân</IonLabel>
           </IonTabButton>
@@ -91,4 +91,8 @@ const App: React.FC = () => (
   </IonApp>
 );
 
-export default withIonLifeCycle(App);
+const goTo= (url: string) => {
+  // window.location.replace(url);
+}
+
+export default App;

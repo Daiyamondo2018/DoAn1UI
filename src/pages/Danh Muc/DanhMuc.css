@@ -1,18 +1,32 @@
 
 .danhmuc {
-    height: 100%;
-    overflow-y: scroll !important;
+    max-height: 100% !important;
     overflow-x: hidden !important;
     -ms-overflow-style: none !important;
 }
 
-.danhmuc .full_image {
+.danhmuc .rightside {
+    width: 75%;
+}
+
+.danhmuc .rightside .full_image {
+    position: relative;
     width: 90% !important;
     margin-left: 5%;
     margin-right: 5%;
     margin-bottom: 5px !important;
 }
 
-.danhmuc .welcome {
+.danhmuc .rightside .welcome {
     text-align: center !important;
+}
+
+.danhmuc .rightside .brand_logo .brand_logo {
+    position: relative;
+    width: 100% !important;
+}
+
+.danhmuc .rightside .brand_logo {
+    display: inline-block;
+    width: 19%;
 }
