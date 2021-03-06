@@ -7,3 +7,11 @@
 .chitiet .laptop .name {
     color: #000000 !important;
 }
+
+.chitiet .ortherproduct {
+    color: #ffffff;
+    background-color: #adadad;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+}

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './DatHang.css';
-import { IonPage, withIonLifeCycle, IonTitle, useIonViewDidEnter, IonGrid, IonRow, IonContent, IonCol, IonLabel, IonInput, IonButton, IonIcon, IonCard, IonButtons } from '@ionic/react';
+import { IonPage, withIonLifeCycle, IonTitle, useIonViewDidEnter, IonGrid, IonRow, IonContent, IonCol, IonLabel, IonInput, IonButton, IonIcon, IonCard, IonButtons, IonAlert, IonSelect, IonSelectOption, IonTextarea } from '@ionic/react';
 import Header from '../ChiTiet/components/Header/Header';
 import { getCart, removeFromCart } from '../../util/cart';
 import { Laptop, Promotion } from '../Trang Chu/components/LaptopBlock/LaptopBlock';
 import { cart } from 'ionicons/icons';
 import { getCookie, putArraytoLocalStorage } from '../../util/cookie';
-import {ChiTietDiaChi} from '../Ca Nhan/pages/DiaChi/DaiChi';
+import {ChiTietDiaChi} from '../Ca Nhan/pages/DiaChi/DiaChi';
 
 const DatHang: React.FC = () => {
 
@@ -17,6 +17,8 @@ const DatHang: React.FC = () => {
     const [addresses, setAddresses] = useState<ChiTietDiaChi[]>([]);
     const [address, setAddress] = useState(new ChiTietDiaChi());
     const [promotions, setPromotions] = useState<Promotion[]>([]);
+    const [rightInput, setRightInput] = useState(true);
+    const [success, setSuccess] = useState("");
 
     useIonViewDidEnter(async () => {
         fetchData();
@@ -108,9 +110,9 @@ const DatHang: React.FC = () => {
         <IonGrid>
             <IonRow>
                 <IonCol>{product.name}</IonCol>
-                <IonCol>{(product.unit_price - product.discount_price).toLocaleString()}</IonCol>
+                <IonCol>{(product.unit_price - product.discount_price).toLocaleString() + " đ"}</IonCol>
                 <IonCol>{quantity}</IonCol>
-                <IonCol>{((product.unit_price - product.discount_price) * quantity).toLocaleString()}</IonCol>
+                <IonCol>{((product.unit_price - product.discount_price) * quantity).toLocaleString() + " đ"}</IonCol>
             </IonRow>
         </IonGrid>
          : "")
@@ -135,7 +137,7 @@ const DatHang: React.FC = () => {
 
     const createOrder = async () => {
         if(!address || !address.id) {
-            alert("Vui lòng thêm địa chỉ để tiến hành đặt hàng!");
+            setRightInput(false);
             return;
         }
         const cart = getCart();
@@ -152,26 +154,65 @@ const DatHang: React.FC = () => {
         });
 
         if (response.ok) {
-            alert("Đặt mua thành công");
-            putArraytoLocalStorage("cart", []);
-            window.location.replace("/donhang");
+            setSuccess("Đặt hàng thành công!");
         }
     };
+
+    const successOrder = () => {
+        localStorage.removeItem("cart");
+        window.location.replace("/donhang");
+    }
+
+    const selectedLocation = addresses.map((ad)=> {
+        return (
+            <IonSelectOption value={ad}>
+                {ad.receiver_name + " - " + ad.receiver_phone}
+            </IonSelectOption>
+        );
+    })
 
     return(
         <IonPage>
             <Header></Header>
             <IonContent class="dathang">
+                <IonAlert 
+                    isOpen={!rightInput}
+                    buttons={['OK']}
+                    header={'Cảnh báo'}
+                    message={"Vui lòng thêm địa chỉ để tiến hành đặt hàng!"}
+                    onDidDismiss={e=> setRightInput(true)}
+                ></IonAlert>
+                <IonAlert 
+                    isOpen={!(success === "")}
+                    buttons={['OK']}
+                    header={'Thông báo'}
+                    message={"Đặt hàng thành công!"}
+                    onDidDismiss={e=> successOrder()}
+                ></IonAlert>
                 <IonRow></IonRow>
                 <IonRow class="row_title">
                     <IonCol>ĐỊA CHỈ GIAO HÀNG</IonCol>
-                    {(address && address.id) ? "" 
-                    : <IonCol>
-                        <IonButton class="button_right" ion-button item-end href="/diachi">
-                            Thêm địa chỉ</IonButton>
-                    </IonCol>}
                 </IonRow>
                 <IonRow></IonRow>
+                {(address && address.id) ? 
+                <IonRow>
+                    <IonCol class="row_title">Chọn địa chỉ</IonCol>
+                    <IonCol>
+                        <IonSelect onIonChange={e=> setAddress(e.detail.value)}>
+                            {selectedLocation}
+                        </IonSelect>
+                    </IonCol>
+                </IonRow>
+                : 
+                <IonRow>
+                    <IonCol></IonCol>
+                    <IonCol>
+                        <IonButton class="button_right" ion-button item-end href="/canhan">
+                        Thêm địa chỉ
+                        </IonButton>
+                    </IonCol>
+                </IonRow>
+                }
                 <IonRow>
                     <IonLabel class="label">Họ tên: </IonLabel>
                     <IonInput class="input" disabled={true} value={address.id ? address.receiver_name : ""} type="text"></IonInput>
@@ -182,18 +223,18 @@ const DatHang: React.FC = () => {
                 </IonRow>
                 <IonRow>
                     <IonLabel class="label">Địa chỉ: </IonLabel>
-                    <IonInput class="input" disabled={true}
-                    value ={ address.id ? address.address_num +", " + address.street + ", " 
+                    <IonTextarea class="input" disabled={true}>
+                    { address.id ? address.address_num +", " + address.street + ", " 
                         + address.ward+ ", "
-                    + address.district + ", " +  address.city : ""} type="text">
-                    </IonInput>
+                    + address.district + ", " +  address.city : ""}
+                    </IonTextarea>
                 </IonRow>
                 <IonRow></IonRow>
                 <IonRow class="row_title">
                     <IonCol>DANH SÁCH SẢN PHẨM</IonCol>
                 </IonRow>
                 <IonRow></IonRow>
-                <IonRow>
+                <IonRow class="table_title">
                     <IonCol>Sản phẩm</IonCol>
                     <IonCol>Đơn giá</IonCol>
                     <IonCol>Số lượng</IonCol>
@@ -205,7 +246,7 @@ const DatHang: React.FC = () => {
                     <IonCol>DANH SÁCH KHUYẾN MÃI</IonCol>
                 </IonRow>
                 <IonRow></IonRow>
-                <IonRow>
+                <IonRow class="table_title">
                     <IonCol>Tên quà tặng</IonCol>
                     <IonCol>Giá trị</IonCol>
                 </IonRow>
@@ -221,19 +262,19 @@ const DatHang: React.FC = () => {
                     <IonCol>
                         <IonRow>
                             <IonCol>Ngày giao (dự kiến): </IonCol>
-                            <IonCol>{(sendDate).toLocaleDateString()}</IonCol>
+                            <IonCol>{(sendDate).toLocaleDateString() + " đ"}</IonCol>
                         </IonRow>
                         <IonRow>
                             <IonCol>Tạm tính: </IonCol>
-                            <IonCol>{totalPrice.toLocaleString()}</IonCol>
+                            <IonCol>{totalPrice.toLocaleString() + " đ"}</IonCol>
                         </IonRow>
                         <IonRow>
                             <IonCol>Phí vận chuyển: </IonCol>
-                            <IonCol>{(totalPrice*5/1000).toLocaleString()}</IonCol>
+                            <IonCol>{(45000).toLocaleString() + " đ"}</IonCol>
                         </IonRow>
-                        <IonRow>
+                        <IonRow class="total">
                             <IonCol>Thành tiền:</IonCol>
-                            <IonCol>{(totalPrice*1.005).toLocaleString()}</IonCol>
+                            <IonCol>{(totalPrice + 45000).toLocaleString() + " đ"}</IonCol>
                         </IonRow>
                     </IonCol>
                 </IonRow>

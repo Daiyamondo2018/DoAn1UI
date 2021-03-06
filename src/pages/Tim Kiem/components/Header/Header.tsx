@@ -23,7 +23,7 @@ class Header extends Component {
             }
             console.log("names: " + names);
             putArraytoLocalStorage("names", names);
-            window.location.replace("/ketqua?name="+name);  
+            window.location.replace("/timkiem/ketqua?name="+name);  
         }
     }
   

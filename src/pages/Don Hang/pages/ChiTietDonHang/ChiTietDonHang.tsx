@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ChiTietDonHang.css';
-import { IonPage, IonHeader, IonTitle, IonContent, IonToolbar, IonIcon, IonCol, IonRow, useIonViewDidEnter, IonGrid, IonItemGroup, IonButton, IonLabel, IonInput, IonTextarea } from '@ionic/react';
+import { IonPage, IonHeader, IonTitle, IonContent, IonToolbar, IonIcon, IonCol, IonRow, useIonViewDidEnter, IonGrid, IonItemGroup, IonButton, IonLabel, IonInput, IonTextarea, IonItem, IonAlert } from '@ionic/react';
 import Header from '../../../Trang Chu/components/Header/Header';
 import { arrowBackOutline } from 'ionicons/icons';
 import { getCookie } from '../../../../util/cookie';
@@ -45,6 +45,7 @@ const ChiTietDonHang: React.FC<Props> = (props) => {
     const [deliveryDate, setDeliveryDate] = useState({});
     const [id, setID] = useState("");
     const [order_delete, setDeleteOrder] = useState(false);
+    const [cancleSuccess, setCancleSuccess] = useState(false);
 
     const goback = () => {
         window.location.replace("/donhang");
@@ -82,18 +83,21 @@ const ChiTietDonHang: React.FC<Props> = (props) => {
             headers: { Authorization: `Bearer ${getCookie("access_token")}` },
         });
         if (response.ok) {
-            window.location.reload();
+            setCancleSuccess(true);
         }
         setDeleteOrder(false);
     }            
 
+    let sumPrice = 0;
+
     const products = details.map((product) => {
+        sumPrice = sumPrice + (product.product_type==="LAPTOP" ? product.total_price : 0);
         return(
             <IonRow>
                 <IonCol>{product.product_name}</IonCol>
                 <IonCol>{product.quantity}</IonCol>
-                <IonCol>{product.unit_price}</IonCol>
-                <IonCol>{product.total_price}</IonCol>
+                <IonCol>{product.unit_price.toLocaleString() + " đ"}</IonCol>
+                <IonCol>{product.total_price.toLocaleString() + " đ"}</IonCol>
             </IonRow>
         );
     })
@@ -111,19 +115,27 @@ const ChiTietDonHang: React.FC<Props> = (props) => {
                 </IonToolbar>
             </IonHeader>
             <IonContent class="chitietdonhang">
+                <IonAlert
+                    isOpen={cancleSuccess}
+                    buttons={['OK']}
+                    header={'Thông báo'}
+                    message={"Hủy đơn hàng thành công!"}
+                    onDidDismiss={e=> window.location.reload()}
+                ></IonAlert>
                 <IonItemGroup>
                     <IonGrid>
                         <IonRow>
                             <IonTitle>Chi tiết đơn hàng {id}</IonTitle>
                         </IonRow>
-                        <IonRow>
-                            <IonCol><IonLabel>Trạng thái: {convertOrderStatus(order.status)}</IonLabel></IonCol>
+                        <IonRow  class="cancle">
+                            <IonCol class="status"><IonLabel>Trạng thái: {convertOrderStatus(order.status)}</IonLabel></IonCol>
                             <IonCol>
                             {["PENDING", "RECEIVED"].includes(order.status) ? 
-                                <IonButton disabled={order_delete} onClick={deleteOrder}>Hủy đơn hàng</IonButton>
+                                <IonButton class="huy" disabled={order_delete} onClick={deleteOrder}>Hủy đơn hàng</IonButton>
                             : "" }
                             </IonCol>
                         </IonRow>
+                        <IonItem class="totalprice">Tổng phí thanh toán: {order.total_price.toLocaleString() + " đ"}</IonItem>
                     </IonGrid>
                 </IonItemGroup>
                 <IonRow></IonRow>

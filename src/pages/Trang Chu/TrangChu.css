@@ -1,27 +1,32 @@
-.content {
+.trangchu {
     height: 100%;
     overflow-y: scroll !important;
     overflow-x: hidden !important;
     -ms-overflow-style: none !important;
 }
 
-.content::-webkit-scrollbar {
+.trangchu::-webkit-scrollbar {
     display: none;
 }
-
-.block_title {
+.trangchu .block_title {
+    background-color:#adadad;
     font-weight: bold;
-    color: #000000;
-    margin: 5px 0px;
+    color: #ffffff;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
 }
 
-.content .full_image {
+.trangchu .full_image {
     width: 90% !important;
     margin-left: 5%;
     margin-right: 5%;
     margin-bottom: 5px !important;
 }
 
-.content .welcome {
+.trangchu .welcome {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 3px;
     text-align: center !important;
 }

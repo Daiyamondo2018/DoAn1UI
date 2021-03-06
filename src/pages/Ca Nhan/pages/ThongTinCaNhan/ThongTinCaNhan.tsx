@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonPage, useIonViewDidEnter, withIonLifeCycle, IonContent, IonButton, IonItemGroup, IonItem, IonLabel, IonInput, IonRadioGroup, IonRadio, IonText, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonIcon, IonRow, IonCol } from '@ionic/react';
+import { IonPage, useIonViewDidEnter, withIonLifeCycle, IonContent, IonButton, IonItemGroup, IonItem, IonLabel, IonInput, IonRadioGroup, IonRadio, IonText, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonIcon, IonRow, IonCol, IonAlert } from '@ionic/react';
 import { getCookie, removeCookie } from '../../../../util/cookie';
 import './ThongTinCaNhan.css';
 import { arrowBackOutline } from 'ionicons/icons';
@@ -19,6 +19,8 @@ export class User_Info {
 const ThongTinCaNhan: React.FC =() => {
 
     const [userInfo, setUser] = useState(new User_Info());
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState(false);
     let bday = "";
     const fetchData = async () => {
         const response = await fetch("/api/users/me", {
@@ -58,6 +60,9 @@ const ThongTinCaNhan: React.FC =() => {
     });
 
     const save = async () => {
+        if(!checkInput()) {
+            return;
+        }
         const response = await fetch("/api/users/me", {
             method: "PUT",
             headers: {
@@ -75,8 +80,26 @@ const ThongTinCaNhan: React.FC =() => {
 
         console.log("response: " + response);
         if (response.ok) {
-            alert("Đã lưu thông tin mới thành công");
+            setSuccess(true);
         }
+    }
+
+    const checkInput = () => {
+        if(userInfo.name === "" || userInfo.phone === ""
+            || userInfo.email === "" || userInfo.gender === ""
+            || userInfo.birthday === "") {
+                setError("Không được để trống các trường!");
+                return false;
+        } 
+        if(!userInfo.email.includes("@")) {
+            setError("Email chưa đúng định dạng!");
+            return false;
+        }
+        if(new Date(userInfo.birthday).getFullYear() <= 1900) {
+            setError("Năm sinh phải lớn hơn 1900!");
+            return false;
+        }
+        return true;
     }
 
     const goback = () => {
@@ -96,6 +119,20 @@ const ThongTinCaNhan: React.FC =() => {
                 </IonToolbar>
             </IonHeader>
             <IonContent class="thongtincanhan">
+                <IonAlert 
+                    isOpen={!(error === "")}
+                    buttons={['OK']}
+                    header={'Cảnh báo'}
+                    message={error}
+                    onDidDismiss={e=> setError("")}
+                ></IonAlert>
+                <IonAlert 
+                    isOpen={success}
+                    buttons={['OK']}
+                    header={'Thông báo'}
+                    message={"Lưu thông tin cá nhân thành công"}
+                    onDidDismiss={e=> setSuccess(false)}
+                ></IonAlert>
                 <IonItem>Cá nhân</IonItem>
                 <IonItemGroup>
                     <IonLabel class="label">Họ tên</IonLabel>
@@ -103,7 +140,7 @@ const ThongTinCaNhan: React.FC =() => {
                     <IonLabel class="label">Email</IonLabel>
                     <IonInput class="input" id="email" value={userInfo.email} onIonChange = {e=> userInfo.email = e.detail.value}></IonInput>
                     <IonLabel class="label">Số điện thoại</IonLabel>
-                    <IonInput class="input" id="phone" value={userInfo.phone} onIonChange = {e=> userInfo.phone = e.detail.value}></IonInput>
+                    <IonInput class="input" type="number" id="phone" value={userInfo.phone} onIonChange = {e=> userInfo.phone = e.detail.value}></IonInput>
                     <IonLabel class="label">Ngày sinh</IonLabel>
                     <IonInput class="input" id="birthday" type="date" value={userInfo.birthday} onIonChange = {e=> userInfo.birthday = String(e.detail.value)}></IonInput>
                     <IonLabel class="label">Giới tính</IonLabel>

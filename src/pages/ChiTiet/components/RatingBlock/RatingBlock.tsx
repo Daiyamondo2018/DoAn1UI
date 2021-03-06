@@ -5,7 +5,7 @@ import { getCookie } from '../../../../util/cookie';
 
 const RatingBlock: React.FC = (prop: any)=> {
 
-    const [rating, setRating] = useState();
+    const [rating, setRating] = useState(0);
     let product = new Laptop();
     product = prop.item;
     const buildRatingBody = () => {
@@ -47,7 +47,7 @@ const RatingBlock: React.FC = (prop: any)=> {
         setRating(value);
     }
 
-
+   
     return(
         <IonItemGroup>
         </IonItemGroup>

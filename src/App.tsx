@@ -41,56 +41,61 @@ import KetQua from './pages/KetQua/KetQua';
 import ThongTinCaNhan from './pages/Ca Nhan/pages/ThongTinCaNhan/ThongTinCaNhan';
 import GioHang from './pages/Gio Hang/GioHang';
 import DatHang from './pages/DatHang/DatHang';
-import DiaChi from './pages/Ca Nhan/pages/DiaChi/DaiChi';
+import DiaChi from './pages/Ca Nhan/pages/DiaChi/DiaChi';
 import ChiTietDonHang from './pages/Don Hang/pages/ChiTietDonHang/ChiTietDonHang';
 import TaiKhoan from './pages/Ca Nhan/pages/TaiKhoan/TaiKhoan';
-const App: React.FC = () => (
-  <IonApp class="app">
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route path="/trangchu" component={TrangChu} exact={true}/>
-          <Route path="/trangchu/:id" component={ChiTiet} exact={true}/>
-          <Route path="/danhmuc" component={DanhMuc} exact={true} />
-          <Route path="/timkiem" component={TimKiem} exact={true} />
-          <Route path="/giohang" component={GioHang} exact={true}/>
-          <Route path="/dathang" component={DatHang} exact={true}/>
-          <Route path="/donhang" component={DonHang} exact={true}/>
-          <Route path="/donhang/:id" component={ChiTietDonHang} exact={true}/>        
-          <Route path="/canhan" component={CaNhan} exact={true}/>
-          <Route path="/taikhoan" component={TaiKhoan} exact={true}></Route>
-          <Route path="/diachi" component={DiaChi} exact={true}></Route>
-          <Route path="/thongtincanhan" component={ThongTinCaNhan}/>
-          <Route path="/ketqua" component={KetQua}/>
-          <Route path="/" render={() => <Redirect to="/trangchu" />} exact={true} />
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" onClick={e=>goTo("/trangchu")} href="/trangchu">
-            <IonIcon icon={home} />
-            <IonLabel>Trang Chủ</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" onClick={e=>goTo("/danhmuc")} href="/danhmuc">
-            <IonIcon icon={grid} />
-            <IonLabel>Danh Mục</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" onClick={e=>goTo("/timkiem")} href="/timkiem">
-            <IonIcon icon={search} />
-            <IonLabel>Tìm Kiếm</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab4" onClick={e=>goTo("/donhang")} href="/donhang">
-            <IonIcon icon={list} />
-            <IonLabel>Đơn Hàng</IonLabel>
-          </IonTabButton>         
-          <IonTabButton tab="tab6" onClick={e=>goTo("/canhan")} href="/canhan">
-            <IonIcon icon={personCircle} />
-            <IonLabel>Cá Nhân</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+import ThemDiaChi from './pages/Ca Nhan/pages/ThemDiaChi/ThemDiaChi';
 
+const App: React.FC = () => {
+  return (
+    <IonApp class="app">
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route path="/trangchu" component={TrangChu} exact={true}/>
+            <Route path="/trangchu/:id" component={ChiTiet} exact={true}/>
+            <Route path="/danhmuc" component={DanhMuc} exact={true} />
+            <Route path="/timkiem" component={TimKiem} exact={true} />
+            <Route path="/donhang/giohang" component={GioHang} exact={true}/>
+            <Route path="/donhang/dathang" component={DatHang} exact={true}/>
+            <Route path="/donhang" component={DonHang} exact={true}/>
+            <Route path="/donhang/:id" component={ChiTietDonHang} exact={true}/>        
+            <Route path="/canhan" component={CaNhan} exact={true}/>
+            <Route path="/canhan/taikhoan" component={TaiKhoan} exact={true}></Route>
+            <Route path="/canhan/diachi" component={DiaChi} exact={true}></Route>
+            <Route path="/canhan/themdiachi" component={ThemDiaChi} exact={true}></Route>
+            <Route path="/canhan/thongtincanhan" component={ThongTinCaNhan}/>
+            <Route path="/timkiem/ketqua" component={KetQua}/>
+            <Route path="/" render={() => <Redirect to="/trangchu" />} exact={true} />
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="tab1" onClick={e=>goTo("/trangchu")} href="/trangchu">
+              <IonIcon icon={home} />
+              <IonLabel>Trang Chủ</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="tab2" onClick={e=>goTo("/danhmuc")} href="/danhmuc">
+              <IonIcon icon={grid} />
+              <IonLabel>Danh Mục</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="tab3" onClick={e=>goTo("/timkiem")} href="/timkiem">
+              <IonIcon icon={search} />
+              <IonLabel>Tìm Kiếm</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="tab4" onClick={e=>goTo("/donhang")} href="/donhang">
+              <IonIcon icon={list} />
+              <IonLabel>Đơn Hàng</IonLabel>
+            </IonTabButton>         
+            <IonTabButton tab="tab6" onClick={e=>goTo("/canhan")} href="/canhan">
+              <IonIcon icon={personCircle} />
+              <IonLabel>Cá Nhân</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  );
+  
+}
 const goTo= (url: string) => {
   // window.location.replace(url);
 }

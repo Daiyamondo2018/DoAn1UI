@@ -1,6 +1,8 @@
 .chitietdonhang .row_title {
     margin-top: 10px !important;
     margin-bottom: 10px !important;
+    background-color: gray;
+    font-weight: bold;
 }
 
 .chitietdonhang .label {
@@ -16,6 +18,23 @@
     border-radius: 5px;
     margin-left: 5%;
     margin-right: 5%;
+}
+
+.chitietdonhang .cancle .huy {
+    color:red !important;
+    font-size: 16px;
+}
+
+.chitietdonhang .cancle .status {
+    padding-top: 15px;
+    color: #41a8b5;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.chitietdonhang .totalprice {
+    color: darkred;
+    font-weight: bold;
 }
 
 .header .title {

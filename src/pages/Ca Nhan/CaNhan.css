@@ -5,9 +5,7 @@
 .profile_picture {
     position: relative;
     color: #ffffff;
-    width: 60px;
-    height: 80px;
-    margin: 5px;
+    max-width: 70px;
 }
 
 .login_label {
@@ -25,8 +23,10 @@
     cursor: pointer;
 }
 
-.static  {
-    margin: 5px;
+.title_ {
+    color: #000000 !important;
+    margin-top: 5px;
+    padding: 5px;
 }
 
 .icon_close {
@@ -37,6 +37,7 @@
 .content .label {
     color: royalblue !important;
     margin: 5px;
+    margin-top: 5px !important;
     padding: 5px;
 }
 
@@ -46,6 +47,8 @@
     border-radius: 5px;
     margin-left: 5%;
     margin-right: 5%;
+    margin-top: 2px;
+    margin-bottom: 10px;
 }
 
 .content .eye {
@@ -66,4 +69,13 @@
     color: #000000;
     text-align: center;
     margin: 10px;
+    margin-bottom: 10px !important;
+}
+
+.error {
+    margin-top: 10px !important;
+    margin-bottom: 5px !important;
+    margin-left: 10px !important;
+    padding: 2px;
+    color: red !important;
 }

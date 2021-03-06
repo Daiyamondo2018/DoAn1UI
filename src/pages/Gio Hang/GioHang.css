@@ -2,10 +2,49 @@
     margin: 15px !important;
 }
 
+.item .name, .price .discount_price{
+    margin-top: 5px;
+    padding: 3px;
+}
+
+.item .price {
+    color: red !important;
+}
+
+.item .discount_price {
+    text-decoration: line-through;
+}
+
 .giohang_header {
-    color: #000000;
+    color: #000000 !important;
 }
 
 .giohang_header .pay {
     color: #000000;
+}
+
+.giohang_header .rightbutton {
+    color: #41a8b5;
+    background-color: #adadad !important;
+    background: #adadad !important;
+}
+
+.giohang_header .rightbutton .black {
+    color: #41a8b5 !important;
+}
+
+.giohang .thanhtien, .giamgia {
+    color: #000000;
+    margin-top: 5px;
+    margin-left: 5px;
+    padding: 5px;
+}
+
+.giohang .thanhtien {
+    color: darkred !important;
+}
+ 
+.giohang .continue {
+    --background: #adadad;
+    background-color:  #ffffff;
 }

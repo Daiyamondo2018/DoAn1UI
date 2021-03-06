@@ -6,3 +6,30 @@
     color: white;
     --background: red !important;
 }
+
+.continue {
+    color: #41a8b5;
+}
+
+.donhang .grid .block_header {
+    background-color: gray;
+    border:  solid 2px #41a8b5;
+}
+
+.donhang .ordercount {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.donhang .grid .orderitem {
+    text-align: left;
+    border-left:  solid 2px #41a8b5;
+    border-right: solid 2px #41a8b5;
+    border-top: solid 1px #41a8b5;
+    border-bottom:  solid 1px #41a8b5;
+    border-collapse: collapse;
+}
+
+.donhang .grid:last-child {
+    border-bottom: solid 2px #41a8b5;
+}

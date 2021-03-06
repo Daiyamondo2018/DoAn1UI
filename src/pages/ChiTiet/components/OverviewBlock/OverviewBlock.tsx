@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { IonItemGroup, IonImg, IonLabel, IonButton, IonGrid, IonCol, IonRow, IonCard, useIonViewDidEnter, withIonLifeCycle, IonInput, IonIcon, IonText } from '@ionic/react';
+import React, { useState, KeyboardEvent } from 'react';
+import { IonItemGroup, IonImg, IonLabel, IonButton, IonGrid, IonCol, IonRow, IonCard, useIonViewDidEnter, withIonLifeCycle, IonInput, IonIcon, IonText, IonAlert } from '@ionic/react';
 import { Laptop, Promotion } from '../../../Trang Chu/components/LaptopBlock/LaptopBlock';
 import './OverviewBlock.css';
 import { convertCPUType, convertResolutionType } from '../../../../util/converter';
-import { cart } from 'ionicons/icons';
+import { cart, calculatorOutline } from 'ionicons/icons';
 import { addToCart, MAXIMUM_QUANTITY_PER_PRODUCT } from '../../../../util/cart';
 
 export type Props = {
@@ -14,8 +14,9 @@ export type Props = {
 const OverviewBlock: React.FC<Props> = (prop)=> {
     let product = prop.item;
     let promotions = prop.promotions;
-    let url = "api/images/400/laptops/" + product.id + "/"+product.alt + ".jpg";
+    let url = "/api/images/400/laptops/" + product.id + "/"+product.alt + ".jpg";
     const [quantity, setQuantity] = useState(1);
+    const [rightQuantity, setRightQuantity] = useState(true);
 
     const decreaseQuantity = () => {
         if(quantity>1) {
@@ -33,30 +34,30 @@ const OverviewBlock: React.FC<Props> = (prop)=> {
         let quantityInput = document.getElementById("quantity")?.getElementsByTagName("input")[0].value;
         if(quantityInput) {
             const quantity = parseInt(quantityInput);
-            console.log("quantityInput: " + quantity);
-            const success = addToCart(productId, quantity);
-            const quantityError = document.getElementById("quantity-error");
-            if (!success) {
-                if(quantityError) {
-                    quantityError.style.display = "inline-block";
-                }
-            } else {
-                if(quantityError) {
-                    quantityError.style.display = "none";
-                }
+            if(quantity <= 0 || quantityInput.includes(".")) {
+                setRightQuantity(false);
+                return;
             }
+            addToCart(productId, quantity);
         }
     }
 
     return( 
         <IonItemGroup>
+            <IonAlert
+             isOpen={!rightQuantity}
+             header={'Thông báo'}
+             buttons={['OK']}
+             message={'Số lượng không hợp lệ'}      
+             onDidDismiss={e=> setRightQuantity(true)}      
+            ></IonAlert>
             <IonImg class="product_image" src={url}></IonImg>
             <IonLabel class="product_name">Laptop {product.name}</IonLabel>
             <IonLabel class="current_price">
-                {(product.unit_price - product.discount_price).toLocaleString()}đ
+                {(product.unit_price - product.discount_price).toLocaleString() + " đ"}
             </IonLabel>
-            <IonLabel class="unit_price">{Number(product.unit_price).toLocaleString()}</IonLabel>
-            <IonLabel class="discount_price">{Number(product.discount_price).toLocaleString()}</IonLabel>
+            <IonLabel class="unit_price">{Number(product.unit_price).toLocaleString() + " đ"}</IonLabel>
+            <IonLabel class="discount_price">{"Giảm " + Number(product.discount_price).toLocaleString()}</IonLabel>
             <IonRow>
                 <IonCol>
                     <IonRow>
@@ -69,7 +70,7 @@ const OverviewBlock: React.FC<Props> = (prop)=> {
                             <IonButton onClick={increaseQuantity}>+</IonButton>
                         </IonCol>
                         <IonCol>
-                            <IonButton onClick={() => addQuantityToCart(product.id)}>
+                            <IonButton class="add_to_quantity" onClick={() => addQuantityToCart(product.id)}>
                             <IonIcon icon={cart}></IonIcon>
                                 &nbsp;&nbsp;
                             Thêm vào giỏ hàng</IonButton>
@@ -77,9 +78,6 @@ const OverviewBlock: React.FC<Props> = (prop)=> {
                     </IonRow>                
                 </IonCol>
             </IonRow>
-            {/* <IonLabel id="quantity-error">
-                Tối đa {MAXIMUM_QUANTITY_PER_PRODUCT} sản phẩm {product.name} trong giỏ hàng
-            </IonLabel> */}
             <IonCard>
                 <IonLabel class="title">Thông số cơ bản</IonLabel>
                 <IonGrid>
@@ -117,7 +115,7 @@ const OverviewBlock: React.FC<Props> = (prop)=> {
                         return (
                         <IonRow class="promotion" key={promotion.id}>
                             <IonImg class="image" title={promotion.name} src={"/api/images/200/promotions/" + promotion.id +"/" + promotion.alt +".jpg"}></IonImg>
-                            <IonCol><IonLabel class="label" className="ion-text-wrap">{promotion.name + " " + promotion.price.toLocaleString() + "đ"}</IonLabel></IonCol>
+                            <IonCol class="label"><IonLabel className="ion-text-wrap">{promotion.name + " " + promotion.price.toLocaleString() + "đ"}</IonLabel></IonCol>
                         </IonRow>
                     ) })
                 }

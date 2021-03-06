@@ -29,10 +29,17 @@
 .chitiet .discount_price {
     margin-top: 5px !important;
     margin-left: 10px !important;
+    text-decoration: none !important;
     font-style: italic;
 }
 
 .chitiet .label {
+    color: black;
+    text-align: left !important;
+    vertical-align: middle !important;
+}
+
+.chitiet .promotion .label {
     color: black;
     text-align: left !important;
     vertical-align: middle !important;
@@ -50,4 +57,8 @@
 .chitiet .title {
     color: #000000 !important;
     font-size: 24px !important;
+}
+
+.chitiet .add_to_quantity {
+    color: #41a8b5;
 }

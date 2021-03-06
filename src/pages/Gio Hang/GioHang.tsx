@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonToolbar, IonRow, withIonLifeCycle, useIonViewDidEnter, IonImg, IonCol, IonIcon, IonInput, IonButton, IonTitle } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonToolbar, IonRow, withIonLifeCycle, useIonViewDidEnter, IonImg, IonCol, IonIcon, IonInput, IonButton, IonTitle, IonText } from '@ionic/react';
 import './GioHang.css';
 import { getCart, removeFromCart, addToCart } from '../../util/cart';
 import { Laptop } from '../Trang Chu/components/LaptopBlock/LaptopBlock';
@@ -83,23 +83,21 @@ const GioHang:React.FC = () =>{
           <IonRow>
             <IonTitle>Giỏ hàng</IonTitle>
             <IonCol class="giohang_header">
-              <IonButton class="pay" href="/dathang" disabled={(totalPrice==0)}>
-                <IonIcon icon={cart}></IonIcon>
-                Tiến hành đặt hàng
+              <IonButton class="rightbutton" href="/donhang/dathang" disabled={(totalPrice==0)}>
+                <IonIcon class="black" icon={cart}></IonIcon>
+                <IonText class="black">Tiến hành đặt hàng</IonText>
               </IonButton>
             </IonCol> 
           </IonRow>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
-        <IonRow>
-        <IonCol>Tổng thành tiền: {totalPrice.toLocaleString()+" đ"}</IonCol>  
-        <IonCol>Tổng giảm giá: {totalDiscount.toLocaleString()+" đ"}</IonCol>  
-        </IonRow>
+      <IonContent class="giohang">
+        <IonTitle class="thanhtien">Tổng thành tiền: {totalPrice.toLocaleString()+" đ"}</IonTitle>  
+        <IonTitle class="giamgia">Tổng giảm giá: {totalDiscount.toLocaleString()+" đ"}</IonTitle>  
         {items}
         <IonRow>
           <IonCol></IonCol>
-          <IonCol><IonButton href="/trangchu">Tiếp tục mua sắm</IonButton></IonCol>
+          <IonCol><IonButton class="continue" href="/trangchu">Tiếp tục mua sắm</IonButton></IonCol>
         </IonRow>
       </IonContent>
     </IonPage>
@@ -154,14 +152,14 @@ export const ProductItem:  React.FC<Props> = props => {
         <IonImg src={url}></IonImg>
       </IonCol>
       <IonCol>
-        <IonRow>{product.name}</IonRow>
-        <IonRow>{(product.unit_price - product.discount_price).toLocaleString()+" đ"}</IonRow>
-        <IonRow>{product.unit_price.toLocaleString()+" đ"}</IonRow>
+        <IonRow class="name">{product.name}</IonRow>
+        <IonRow class="price">{(product.unit_price - product.discount_price).toLocaleString()+" đ"}</IonRow>
+        <IonRow class="discount_price">{product.unit_price.toLocaleString()+" đ"}</IonRow>
         <IonRow>
           <IonCol>
             <IonButton onClick={decreaseQuantity}>-</IonButton>
           </IonCol>
-          <IonInput id="quantity" type="number" min="1" max="100" defaultValue={quantity} value={quantity}></IonInput>
+          <IonInput disabled={true} id="quantity" type="number" min="1" max="100" defaultValue={quantity} value={quantity}></IonInput>
           <IonCol>
             <IonButton onClick={increaseQuantity}>+</IonButton>
           </IonCol>

@@ -32,7 +32,7 @@ const Header:React.FC<SearchParam> = (props) =>{
             }
             console.log("names: " + names);
             putArraytoLocalStorage("names", names);
-            window.location.replace("/ketqua?name="+name);  
+            window.location.replace("/timkiem/ketqua?name="+name);  
         }
     }
     return(
@@ -40,7 +40,7 @@ const Header:React.FC<SearchParam> = (props) =>{
             <IonToolbar class="header_toolbar">
                 <IonButtons>
                     <IonSearchbar id="searchbar" value={searchParam} color="black" class="header_searchbar" placeholder = "Nhập tên để tìm..." onKeyPress={e =>goToAnotherPage(e)}/>
-                    <IonButton href="/giohang" ion-button item-end>
+                    <IonButton href="/donhang/giohang" ion-button item-end>
                         <IonIcon class="cart" icon={cart}>
                         </IonIcon>
                         <IonText id = "cart_count"></IonText>

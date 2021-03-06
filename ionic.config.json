@@ -3,5 +3,11 @@
   "integrations": {
     "capacitor": {}
   },
-  "type": "react"
+  "type": "react",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://10.45.237.127:8081/api"
+    }
+  ]
 }

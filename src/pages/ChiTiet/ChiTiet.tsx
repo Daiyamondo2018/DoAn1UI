@@ -110,7 +110,7 @@ const ChiTiet:React.FC = ()=>{
                 <IonTitle class="title">Thông Tin Chi Tiết</IonTitle>
                 <OverviewBlock promotions={promotions} item = {item}></OverviewBlock>
                 <DetailBlock item = {item}></DetailBlock>
-                <IonLabel>Sản phẩm khác</IonLabel>
+                <IonTitle class="ortherproduct">Sản phẩm khác</IonTitle>
                 <HLaptopBlock items={items}></HLaptopBlock>
             </IonContent>
         </IonPage>

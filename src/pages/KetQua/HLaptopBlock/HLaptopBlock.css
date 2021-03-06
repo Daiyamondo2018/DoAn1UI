@@ -19,7 +19,7 @@
 .laptop {
     display: inline-block !important;
     vertical-align: top !important;
-    width: 180px;
+    width: 170px;
     height: 220px;
 }
 
@@ -41,6 +41,7 @@
 }
 
 .laptop .discount_price {
+    margin-left: 10px;
     text-align: center !important;
     text-decoration: line-through;
 }

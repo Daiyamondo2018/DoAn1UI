@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonViewDidEnter, IonGrid, IonRow, IonCol, IonButton, IonButtons, IonLabel } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonViewDidEnter, IonGrid, IonRow, IonCol, IonButton, IonButtons, IonLabel, IonItem } from '@ionic/react';
 import './DonHang.css';
 import { isLogin } from '../../util/account';
 import { Redirect } from 'react-router';
@@ -47,7 +47,7 @@ const DonHang:React.FC = () =>{
 
   const orderBlock = orders.map((order) => {
     return (
-      <IonRow key={order["order"]["id"]} onClick={() => goToDetailPage(order["order"]["id"])}>
+      <IonRow class="orderitem" key={order["order"]["id"]} onClick={() => goToDetailPage(order["order"]["id"])}>
         <IonCol>{order["order"]["id"]}</IonCol>
         <IonCol>{order["order"]["order_date"]["dayOfMonth"] + "-" 
         + order["order"]["order_date"]["monthValue"] + "-" 
@@ -87,11 +87,9 @@ const DonHang:React.FC = () =>{
           <IonTitle>Danh Sách Đơn Hàng</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
-        <IonRow>
-          <IonLabel>Tổng số đơn hàng: {orderCount}</IonLabel>
-        </IonRow>
-        <IonGrid>
+      <IonContent class="donhang">
+        <IonItem class="ordercount">Tổng số đơn hàng: {orderCount}</IonItem>
+        <IonGrid class="grid">
           <IonRow class="block_header">
             <IonCol>Mã đơn hàng</IonCol>
             <IonCol>Ngày mua</IonCol>
@@ -104,7 +102,7 @@ const DonHang:React.FC = () =>{
         <IonRow>
           <IonCol></IonCol>
           <IonCol>
-            <IonButton ion-button item-end onClick={goto_HomePage}>Tiếp tục mua sắm</IonButton>
+            <IonButton class="continue" ion-button item-end onClick={goto_HomePage}>Tiếp tục mua sắm</IonButton>
           </IonCol>
         </IonRow>
       </IonContent>

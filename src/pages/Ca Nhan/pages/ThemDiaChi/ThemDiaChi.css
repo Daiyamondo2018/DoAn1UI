@@ -1,0 +1,38 @@
+.header {
+    background-color: royalblue !important;
+}
+
+.back {
+    margin: 10px !important;
+}
+
+.title {
+    text-align: center !important;
+    color: white !important;
+    background-color: transparent !important;
+}
+
+.diachi .label {
+    color: royalblue !important;
+    margin: 5px;
+    padding: 5px;
+}
+
+.diachi .input {
+    width: 90% !important;
+    border: solid papayawhip 1px !important;
+    border-radius: 5px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 2px;
+    margin-bottom: 5px;
+}
+
+.diachi  .save_button {
+    margin-top: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    color: white;
+    --background: red !important;
+}

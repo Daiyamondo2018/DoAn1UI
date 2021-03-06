@@ -10,17 +10,17 @@ const HotKey:React.FC = () => {
     let hotTypes = ["Giá rẻ", "Sản phảm mới"];
 
     const handleSearchBrand = (item: string) => {
-        let url ="/ketqua?brand=" + item;
+        let url ="/timkiem/ketqua?brand=" + item;
         window.location.replace(url);
     }
 
     const handleSearchDemand = (item: string) => {
-        let url ="/ketqua?demand=" + item;
+        let url ="/timkiem/ketqua?demand=" + item;
         window.location.replace(url);
     }
 
     const handleSearchType = (item: string) => {
-        let url ="/ketqua?type=" + convertTypeToQueryType(item);
+        let url ="/timkiem/ketqua?type=" + convertTypeToQueryType(item);
         window.location.replace(url);
     }
 

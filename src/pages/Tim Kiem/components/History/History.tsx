@@ -37,7 +37,7 @@ const History:React.FC = () => {
         if(element === null) {
             return("");
         }
-        const url = "/ketqua?name=" + element;
+        const url = "/timkiem/ketqua?name=" + element;
         return(
             element!= "" ? <IonRow key={element}>
                 <IonButton class="search_button" key={element} href={url}>{element}</IonButton>            

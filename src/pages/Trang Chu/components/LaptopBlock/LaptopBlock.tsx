@@ -70,10 +70,14 @@ const LaptopBlock:React.FC = (props: any)=>{
 
     useIonViewDidEnter(async () => {
         await fetchData(props.url);
+        console.log("url: " + props.url);
+        console.log(JSON.stringify(items));
     });
 
     async function fetchData(url: any) {
+        console.log("url config: " + url);
         let respone = await fetch(url);
+        console.log("response: " + respone);
         let data = await respone.json();
         setItems(data);
     }

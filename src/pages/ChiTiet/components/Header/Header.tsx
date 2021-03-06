@@ -24,12 +24,12 @@ class Header extends Component{
             }
             console.log("names: " + names);
             putArraytoLocalStorage("names", names);
-            window.location.replace("/ketqua?name="+name);  
+            window.location.replace("/timkiem/ketqua?name="+name);  
         }
     }
 
     goback() {
-        window.location.replace("/trangchu");
+        window.location.replace("/donhang/giohang");
     }
     render() {
         let cartItems = getCart();
@@ -40,7 +40,7 @@ class Header extends Component{
                     <IonButtons>
                         <IonIcon class="toolbar_icon" onClick={() => this.goback()} icon={arrowBackOutline}></IonIcon>
                         <IonSearchbar id="searchbar" color="black" class="header_searchbar" placeholder = "Nhập tên để tìm..." onKeyPress={e =>this.goToAnotherPage(e)}/>
-                        <IonButton href="/giohang" ion-button item-end>
+                        <IonButton href="/donhang/giohang" ion-button item-end>
                             <IonIcon class="cart" icon={cart}>
                             </IonIcon>
                             <IonText id = "cart_count"></IonText>

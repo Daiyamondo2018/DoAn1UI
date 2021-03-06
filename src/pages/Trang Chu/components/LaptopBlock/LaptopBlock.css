@@ -1,9 +1,4 @@
-.contents {
-    min-height: 260px;
-    max-height: 300px;
-}
-
-.laptops {
+.trangchu .laptops {
     margin: 0px !important;
     width: 100%;
     overflow-x: scroll !important;
@@ -12,11 +7,11 @@
     -ms-overflow-style: none;
 }
 
-.laptops::-webkit-scrollbar {
+.trangchu .laptops::-webkit-scrollbar {
     display: none;
 }
 
-.laptops .laptop {
+.trangchu .laptops .laptop {
     margin: 0px !important;
     display: inline-block !important;
     vertical-align: top !important;
@@ -24,15 +19,15 @@
     height: 220px !important;
 }
 
-.laptops .laptop .name {
+.trangchu .laptops .laptop .name {
     color: #000000;
 }
 
-.laptops .laptop .product_image {
+.trangchu .laptops .laptop .product_image {
     height: 150px !important;
 }
 
-.laptops .laptop .price {
+.trangchu .laptops .laptop .price {
     margin-left: 10px !important;
     text-align: center !important;
     color: darkred;
@@ -40,13 +35,14 @@
     font-weight: bold;
 }
 
-.laptops .laptop .discount_price {
+.trangchu .laptops .laptop .discount_price {
+    margin-left: 10px;
     width: 100% !important;
     text-align: center !important;
     text-decoration: line-through;
 }
 
-.laptops .laptop .ratingIcon {
+.trangchu .laptops .laptop .ratingIcon {
     font-size: 16px;
     margin-right: 3px;
 }

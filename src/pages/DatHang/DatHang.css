@@ -11,6 +11,8 @@
 }
 
 .dathang .row_title {
+    font-weight: bold;
+    margin-left: 10px !important;
     margin-top: 10px !important;
     margin-bottom: 10px !important;
 }
@@ -33,4 +35,15 @@
 .dathang .button_right {
     position: relative;
     right: 0px !important;
+    color: #41a8b5;
+}
+
+.dathang .table_title {
+    background: gray !important;
+    font-weight: bold;
+}
+
+.dathang .total {
+    color: darkred;
+    font-weight: bold;
 }
